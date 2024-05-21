@@ -12,20 +12,20 @@ export const Upload = () => {
 	const docs = useStore(notifyStore, state => state.files)
 	const disabled = docs.find(({status}) => status !== "added");
 	const isUploading = useStore(notifyStore, state => state.isUploading)
-
+	
 	const {mutate} = useWorkoutUpload()
 	const queryClient = useQueryClient()
-
+	
 	function dragStartHandler(e: React.DragEvent<HTMLDivElement>) {
 		e.preventDefault()
 		setDrag(true)
 	}
-
+	
 	function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
 		e.preventDefault()
 		setDrag(false)
 	}
-
+	
 	function onDropHandler(e: React.DragEvent<HTMLDivElement>) {
 		e.preventDefault()
 		if (e.dataTransfer?.files?.length) {
@@ -34,7 +34,7 @@ export const Upload = () => {
 			addFiles(files)
 		}
 	}
-
+	
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
 		if (e.target?.files?.length) {
 			const files = [...e.target.files]
@@ -43,7 +43,7 @@ export const Upload = () => {
 			addFiles(files)
 		}
 	}
-
+	
 	async function upload() {
 		if (docs.length) {
 			for (const doc of docs) {
@@ -56,14 +56,14 @@ export const Upload = () => {
 			setUploading(true)
 		}
 	}
-
+	
 	function onClose() {
 		if (isUploading) {
 			setUploading(false)
 			removeAllFiles()
 		}
 	}
-
+	
 	return (
 		<div className="w-full h-full flex flex-col items-center justify-center gap-4">
 			<div
@@ -74,6 +74,10 @@ export const Upload = () => {
 				onDrop={e => onDropHandler(e)}>
 				<div className='p-4'>
 					<input
+						onDragStart={e => dragStartHandler(e)}
+						onDragLeave={e => dragLeaveHandler(e)}
+						onDragOver={e => dragStartHandler(e)}
+						onDrop={e => onDropHandler(e)}
 						type="file" multiple={true} accept={'.fit'}
 						onChange={e => handleInputChange(e)}
 						className="file-input w-full max-w-xs"
@@ -81,7 +85,7 @@ export const Upload = () => {
 				</div>
 			</div>
 			<div className="overflow-x-auto h-44 sm:h-72 w-full">
-				<table className="table table-zebra">
+				<table className="table table-sm table-zebra">
 					<thead/>
 					<tbody>
 					{docs.map((doc) =>
@@ -91,18 +95,18 @@ export const Upload = () => {
 							'hover': true,
 						})}>
 							<td>
-								{doc.status !== 'error' && doc.file.name}
-								{doc.status === 'error' && <div className="collapse bg-base-200">
-									<input type="checkbox"/>
-									<div className="collapse-title">
-										{doc.file.name}
-									</div>
-									<div className="collapse-content">
-										<p>{doc.error}</p>
-									</div>
-								</div>}
+								{doc.status !== 'error' ? <div className='p-1'>{doc.file.name}</div>
+									: <div className="collapse w-full rounded-none">
+										<input type="checkbox"/>
+										<div className="collapse-title p-1">
+											{doc.file.name}
+										</div>
+										<div className="collapse-content px-1">
+											<p>{doc.error}</p>
+										</div>
+									</div>}
 							</td>
-							<td onClick={() => doc.status === 'added' && removeOneFile(doc)} className={classnames({
+							<td onClick={() => removeOneFile(doc)} className={classnames({
 								'cursor-pointer': doc.status === 'added',
 								'group': true
 							})}>

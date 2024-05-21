@@ -79,22 +79,15 @@ export const changeStatus = (doc: UploadDoc, status: Status, error = null) => {
 	});
 };
 
-// export const addOneFile = (doc: Doc) => {
-// 	notifyStore.setState((state) => {
-// 		return {
-// 			...state,
-// 			files: state.files.filter(({file}) => file.name === doc.file.name),
-// 		}
-// 	});
-// };
-
 export const removeOneFile = (doc: UploadDoc) => {
-	notifyStore.setState((state) => {
-		return {
-			...state,
-			files: state.files.filter(({file}) => file.name !== doc.file.name),
-		}
-	});
+	if (doc.status === 'added') {
+		notifyStore.setState((state) => {
+			return {
+				...state,
+				files: state.files.filter(({file}) => file.name !== doc.file.name),
+			}
+		});
+	}
 };
 
 export const removeAllFiles = () => {
