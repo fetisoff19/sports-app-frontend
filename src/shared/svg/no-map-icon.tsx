@@ -8,11 +8,11 @@ interface IProps {
 }
 
 export const NoMapIcon: React.FC<IProps> = ({
-																							height = '200px',
-																							width = '200px',
-																							fillLeft = 'black',
-																							fillRight = 'white',
-																						}) => {
+	                                            height = '200px',
+	                                            width = '200px',
+	                                            fillLeft = 'black',
+	                                            fillRight = 'white',
+                                            }) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'

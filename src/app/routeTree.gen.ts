@@ -14,6 +14,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './router/__root'
 import { Route as IndexImport } from './router/index'
+import { Route as ViewUuidImport } from './router/view.$uuid'
 
 // Create Virtual Routes
 
@@ -46,6 +47,11 @@ const LoginLazyRoute = LoginLazyImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ViewUuidRoute = ViewUuidImport.update({
+  path: '/view/$uuid',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkoutsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/view/$uuid': {
+      id: '/view/$uuid'
+      path: '/view/$uuid'
+      fullPath: '/view/$uuid'
+      preLoaderRoute: typeof ViewUuidImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -99,6 +112,7 @@ export const routeTree = rootRoute.addChildren({
   SettingsLazyRoute,
   StatsLazyRoute,
   WorkoutsLazyRoute,
+  ViewUuidRoute,
 })
 
 /* prettier-ignore-end */

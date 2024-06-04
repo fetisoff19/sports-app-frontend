@@ -1,4 +1,4 @@
-import {AxiosResponse} from "axios";
+import {AxiosResponse} from 'axios'
 
 export const onResponse = (response: AxiosResponse): AxiosResponse['data'] => {
 	if (typeof window !== 'undefined') {

@@ -14,15 +14,15 @@ export const useObserver = (
 		},
 		[fetchNextPage],
 	)
-
+	
 	useEffect(() => {
 		const element = observerElem.current
-		const option = {threshold: 0}
-
+		const option = {rootMargin: '300px'}
+		
 		const observer = new IntersectionObserver(handleObserver, option)
 		if (element) {
 			observer.observe(element)
 			return () => observer.unobserve(element)
 		}
-	}, [fetchNextPage, hasNextPage, handleObserver])
+	}, [fetchNextPage, hasNextPage, handleObserver, observerElem])
 }

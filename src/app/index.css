@@ -1,13 +1,26 @@
+@import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
+@import 'react-calendar/dist/Calendar.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: Inter, system-ui, sans-serif;
+  }
+}
 
 :root {
   width: 100vw;
   height: 100vh;
   padding: 0;
   margin: 0;
-  background: rgba(30, 31, 34, 1);
+  /*background: rgba(30, 31, 34, 1);*/
+  /*background: #1c1c1e;*/
+  background: #35363A;
+
 }
 
 body {
@@ -16,7 +29,8 @@ body {
   padding: 0;
   margin: 0;
   /*background: #1d2939;*/
-  background: rgba(30, 31, 34, 1);
+  /*background: rgba(30, 31, 34, 1);*/
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,11 +48,22 @@ we still enforce color-scheme: dark, despite the user preference */
 }
 
 .no-map {
-  background-image: url("../../assets/no-map.svg");
+  background-image: url("../../public/no-map.svg");
 }
 
-.filter {
+.filter:not(.map-icon) {
   filter: saturate(0.3) invert(1) hue-rotate(180deg);
+}
+
+.map-icon {
+  /*height and width not working*/
+  filter: saturate(1) invert(1) hue-rotate(180deg);
+
+  svg {
+    margin-top: 20%;
+    height: 80%;
+    width: 80%;
+  }
 }
 
 .drawer-side::-webkit-scrollbar {
@@ -76,7 +101,54 @@ we still enforce color-scheme: dark, despite the user preference */
   width: 0;
 }
 
-/*}*/
-
-
+/*date-picker */
+.react-daterange-picker__inputGroup:hover {
+  color: white;
 }
+
+.react-daterange-picker__wrapper {
+  border: none;
+}
+
+.react-daterange-picker__button svg {
+  stroke: #9A9FA3;
+}
+
+
+.react-daterange-picker__button:enabled:hover .react-daterange-picker__button__icon,
+.react-daterange-picker__button:enabled:focus .react-daterange-picker__button__icon {
+  stroke: white;
+}
+
+/*react-calendar*/
+
+.react-calendar {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  border: none;
+  background: #2A2B2F;
+}
+
+.react-daterange-picker__inputGroup {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.leaflet-control-attribution {
+  display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: #9A9FA3;
+}
+
+
+/* fix chromium-bug: https://github.com/highcharts/highcharts/issues/21144*/
+.charts {
+  pointer-events: fill;
+}
+

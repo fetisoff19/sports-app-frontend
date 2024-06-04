@@ -1,20 +1,41 @@
-import {useStore} from "@tanstack/react-store";
-import {addFiles, notifyStore, removeAllFiles, removeOneFile, setUploading} from "@/entities/notify";
-import React from "react";
-import {QUERY_KEY_WORKOUTS, useWorkoutUpload} from "@/entities/workout";
-import {useQueryClient} from "@tanstack/react-query";
-import {Clear, Done, Error} from "@/shared/svg";
-import classnames from "classnames";
-import {QUERY_KEY_AUTH} from "@/entities/auth/model";
+import {useStore} from '@tanstack/react-store'
+import {
+	addFiles,
+	addNotify,
+	changeStatus,
+	notifyStore,
+	removeAllFiles,
+	removeOneFile,
+	setUploading
+} from '@/entities/notify'
+import React, {useEffect} from 'react'
+import {QUERY_KEY_SOME_WORKOUTS, useWorkoutUpload} from '@/entities/workout'
+import {useQueryClient} from '@tanstack/react-query'
+import {ClearIcon, DoneIcon, ErrorIcon} from '@/shared/svg'
+import classnames from 'classnames'
+import {useAuth} from '@/entities/auth/api/queries'
+import axios from 'axios'
+import {QUERY_KEY_STATS_MAIN} from '@/entities/stats'
 
 export const Upload = () => {
 	const [isDrag, setDrag] = React.useState<boolean>(false)
 	const docs = useStore(notifyStore, state => state.files)
-	const disabled = docs.find(({status}) => status !== "added");
+	const disabled = docs.find(({status}) => status !== 'added')
 	const isUploading = useStore(notifyStore, state => state.isUploading)
+	const {refetch} = useAuth()
 	
-	const {mutate} = useWorkoutUpload()
+	const {mutateAsync} = useWorkoutUpload()
 	const queryClient = useQueryClient()
+	
+	useEffect(() => {
+		if (isUploading && docs.length) {
+			const successfullyCount = docs.filter(({status}) => status === 'success').length
+			addNotify({
+				type: 'info',
+				message: `Processing completed: ${successfullyCount} workouts out of ${docs.length} have been successfully added.`
+			})
+		}
+	}, [isUploading, docs])
 	
 	function dragStartHandler(e: React.DragEvent<HTMLDivElement>) {
 		e.preventDefault()
@@ -39,7 +60,8 @@ export const Upload = () => {
 		if (e.target?.files?.length) {
 			const files = [...e.target.files]
 				.filter(workout => workout.name.split('.')
-					.pop() === 'fit')
+					.pop()?.toLowerCase() === 'fit')
+			
 			addFiles(files)
 		}
 	}
@@ -49,10 +71,20 @@ export const Upload = () => {
 			for (const doc of docs) {
 				const formData = new FormData()
 				formData.append('file', doc.file, doc.file.name)
-				mutate({formData, doc})
+				try {
+					await mutateAsync({formData, doc})
+					changeStatus(doc, 'success')
+				} catch (e: unknown) {
+					if (axios.isAxiosError(e)) {
+						changeStatus(doc, 'error', e?.response?.data?.message || e?.message)
+					} else {
+						addNotify({type: 'error', message: e?.toString() || 'Unknown error'})
+					}
+				}
 			}
-			await queryClient.invalidateQueries({queryKey: [QUERY_KEY_AUTH]})
-			await queryClient.invalidateQueries({queryKey: [QUERY_KEY_WORKOUTS]})
+			await queryClient.invalidateQueries({queryKey: [QUERY_KEY_SOME_WORKOUTS], refetchType: 'all'},)
+			await queryClient.invalidateQueries({queryKey: [QUERY_KEY_STATS_MAIN], refetchType: 'all'},)
+			await refetch()
 			setUploading(true)
 		}
 	}
@@ -67,12 +99,12 @@ export const Upload = () => {
 	return (
 		<div className="w-full h-full flex flex-col items-center justify-center gap-4">
 			<div
-				className={`flex items-center justify-center h-44 sm:h-44 w-full rounded-2xl ${isDrag ? 'bg-gray-600' : 'bg-gray-700'}`}
+				className={`flex items-center justify-center h-44 sm:h-44 w-full rounded-2xl ${isDrag ? 'bg-neutral' : 'bg-secondary'}`}
 				onDragStart={e => dragStartHandler(e)}
 				onDragLeave={e => dragLeaveHandler(e)}
 				onDragOver={e => dragStartHandler(e)}
 				onDrop={e => onDropHandler(e)}>
-				<div className='p-4'>
+				<div className="p-4">
 					<input
 						onDragStart={e => dragStartHandler(e)}
 						onDragLeave={e => dragLeaveHandler(e)}
@@ -94,8 +126,8 @@ export const Upload = () => {
 							'text-red-600': doc.status === 'error',
 							'hover': true,
 						})}>
-							<td>
-								{doc.status !== 'error' ? <div className='p-1'>{doc.file.name}</div>
+							<td className="w-full">
+								{doc.status !== 'error' ? <div className="p-1">{doc.file.name}</div>
 									: <div className="collapse w-full rounded-none">
 										<input type="checkbox"/>
 										<div className="collapse-title p-1">
@@ -108,17 +140,19 @@ export const Upload = () => {
 							</td>
 							<td onClick={() => removeOneFile(doc)} className={classnames({
 								'cursor-pointer': doc.status === 'added',
-								'group': true
+								'group': true,
 							})}>
-								{doc.status === 'added' ? <Clear/> : doc.status === 'error' ? <Error/> : <Done/>}
+								{doc.status === 'added' ? <ClearIcon/> : doc.status === 'error' ? <ErrorIcon/> : <DoneIcon/>}
 							</td>
 						</tr>)}
 					</tbody>
 				</table>
 			</div>
-			<div className='w-full'>
-				<button className='btn' onClick={onClose}>Hide</button>
-				<div className={`btn ${(!docs.length || !!disabled) && 'btn-disabled'}`} onClick={upload}>Upload</div>
+			<div className="w-full flex flex-row gap-4 justify-end">
+				<button className="btn btn-neutral w-32" onClick={onClose}>Hide</button>
+				<div className={`btn btn-success w-32 ${(!docs.length || !!disabled) && 'btn-disabled'}`}
+				     onClick={upload}>Upload
+				</div>
 			</div>
 		</div>
 	)

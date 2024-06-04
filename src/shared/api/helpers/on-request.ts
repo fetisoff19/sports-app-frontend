@@ -1,4 +1,4 @@
-import {InternalAxiosRequestConfig} from "axios";
+import {InternalAxiosRequestConfig} from 'axios'
 
 export const onRequest = (config: InternalAxiosRequestConfig) => {
 	if (typeof window !== 'undefined') {
