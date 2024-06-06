@@ -6,7 +6,8 @@ const Login = () => {
 	
 	return (
 		<div
-			className="bg-[url('/auth-bg-mobile.jpg')] md:bg-[url('/auth-bg-desktop.jpg')] md:h-[calc(100vh-4rem)] w-full bg-cover bg-center bg-fixed flex flex-col items-center justify-between">
+			className="bg-[url('/auth-bg-mobile.jpg')] md:bg-[url('/auth-bg-desktop.jpg')] md:h-[calc(100vh-4rem)]
+			mt-16 w-full bg-cover bg-center bg-fixed flex flex-col items-center justify-between ml-auto mr-auto">
 			<div className="flex flex-col gap-8 m-8 md:flex-row leading-6 max-w-[1200px]">
 				<div className="rounded-2xl p-8 bg-base-100/85 h-fit max-w-96 sm:max-w-80 shadow-xl">
 					{isRegister ? <Register setRegister={setRegister}/> : <Auth setRegister={setRegister}/>}

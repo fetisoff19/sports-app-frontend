@@ -7,10 +7,9 @@ import Overview from '@/pages/overview.tsx'
 export const Route = createFileRoute('/')({
 	component: () => {
 		const isAuth = useStore(authStore, (state) => state.isAuth)
-		
 		if (isAuth) {
 			return <Overview/>
 		}
 		return <Login/>
-	}
+	},
 })

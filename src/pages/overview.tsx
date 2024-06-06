@@ -31,7 +31,7 @@ const Overview = () => {
 	useObserver(observerElem, fetchNextPage, hasNextPage)
 	
 	return (
-		<div className="flex flex-col justify-items-center gap-8 pt-8 xl:w-[1200px]">
+		<div className="flex flex-col justify-items-center gap-8 padding xl:w-[1200px]">
 			<OverviewToolbar/>
 			{user?.workoutCount === 0 ? <AddFirstWorkout/> :
 				<>

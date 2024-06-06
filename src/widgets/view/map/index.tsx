@@ -3,8 +3,7 @@ import L, {LatLngExpression} from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import ReactDOMServer from 'react-dom/server'
 import {PointIcon} from '@/shared/svg'
-import {ReactNode} from 'react'
-
+import {ReactNode, useLayoutEffect, useState} from 'react'
 
 type MarkerProps = {
 	position: LatLngExpression
@@ -32,6 +31,16 @@ type Props = {
 }
 
 export const Map = ({points, index}: Props) => {
+	const [isMountMap, setIsMountMap] = useState(false)
+	
+	//to prevent map re-initialization
+	useLayoutEffect(() => {
+		setIsMountMap(true)
+		return () => {
+			setIsMountMap(false)
+		}
+	}, [])
+	
 	if (!points?.length) {
 		return null
 	}
@@ -44,7 +53,8 @@ export const Map = ({points, index}: Props) => {
 		i = 0
 	}
 	
-	return (
+	
+	if (isMountMap) return (
 		<MapContainer className="filter h-[300px]" bounds={L.latLngBounds(points)}>
 			<TileLayer attribution='<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"/>

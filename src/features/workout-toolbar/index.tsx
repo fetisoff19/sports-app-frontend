@@ -57,7 +57,6 @@ export const WorkoutToolbar = ({sportsList}: Props) => {
 		return []
 	}
 	
-	
 	return (
 		<div className="flex flex-col gap-4 sm:w-full md:flex-row xl:max-w-[1200px]">
 			<div className="w-full min-w-32">
@@ -70,9 +69,9 @@ export const WorkoutToolbar = ({sportsList}: Props) => {
 				</label>
 			</div>
 			<div className="flex  flex-row gap-4 justify-between md:justify-center">
-				<label className="swap btn btn-ghost bg-base-100 rounded-2xl hover:bg-base-300 group shadow-xl">
+				<label className="swap btn btn-ghost bg-base-100 rounded-2xl group shadow-xl">
 					<input type="checkbox" onChange={handleDirectionChange}/>
-					{direction === 'DESC' ? <DirectionDownIcon/> : <DirectionUpIcon/>}
+					{direction == 'DESC' ? <DirectionDownIcon/> : <DirectionUpIcon/>}
 				</label>
 				<Dropdown valueList={filteredParamFields()} setValue={setParam} value={param} fields={paramNames}/>
 				<Dropdown valueList={sportsList} setValue={setSport} value={sport} fields={sportNames} btnSuccess={true}/>

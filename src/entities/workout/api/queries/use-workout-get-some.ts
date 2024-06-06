@@ -15,7 +15,7 @@ export function useWorkoutGetSome(type: 'OVERVIEW' | 'WORKOUTS', params: Omit<Wo
 	} = useInfiniteQuery({
 			queryKey: [QUERY_KEY_SOME_WORKOUTS, type, params],
 			queryFn: ({pageParam}) =>
-				WorkoutApi.getMany({
+				WorkoutApi.getSome({
 					limit: QueryLimit,
 					offset: pageParam * QueryLimit,
 					...params,

@@ -1,3 +1,5 @@
+export * from './date-service.ts'
+
 export function getMinSec(minutes: number | null) {
 	if (!minutes) return 0
 	const min = Math.floor(minutes)

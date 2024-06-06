@@ -53,6 +53,6 @@ export const QUERY_KEY_STATS_POWER_CURVE = 'QUERY_KEY_STATS_POWER_CURVE'
 
 export type StatsApiParam = {
 	sport: string
-	start: Date | null
-	end: Date | null
+	start: string | null
+	end: string | null
 }

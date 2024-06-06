@@ -1,4 +1,4 @@
-import api from '@/shared/api'
+import api, {SERVER_URL} from '@/shared/api'
 import {WorkoutApiParam, WorkoutFromDb, WorkoutItem} from '@/entities/workout'
 import {UploadDoc} from '@/entities/notify'
 
@@ -25,7 +25,7 @@ export class WorkoutApi {
 		return api.get(`${PATH}/one`, {params})
 	}
 	
-	static async getMany(params?: WorkoutApiParam): Promise<WorkoutItem[]> {
+	static async getSome(params?: WorkoutApiParam): Promise<WorkoutItem[]> {
 		return api.get(`${PATH}`, {params})
 	}
 	
@@ -39,5 +39,13 @@ export class WorkoutApi {
 	
 	static async deleteAll() {
 		return api.delete<void>(`${PATH}/all`)
+	}
+	
+	static async getImage(path: string | null): Promise<Blob | null> {
+		const src = `${SERVER_URL}/${path}`
+		if (path) {
+			return api.get(src, {baseURL: '', responseType: 'blob'})
+		}
+		return null
 	}
 }

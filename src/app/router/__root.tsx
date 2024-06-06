@@ -1,6 +1,6 @@
 import {createRootRouteWithContext, Outlet, ScrollRestoration} from '@tanstack/react-router'
 import {Header} from '@/widgets/header'
-import {Suspense, useEffect} from 'react'
+import {useEffect} from 'react'
 import {useAuth} from '@/entities/auth/api/queries'
 import {useStore} from '@tanstack/react-store'
 import {authStore} from '@/entities/auth/model'
@@ -22,16 +22,10 @@ export const Route = createRootRouteWithContext<{
 			}
 		}, [isAuth, refetch])
 		
-		
 		return (
-			<Suspense fallback={<div className="w-screen h-screen flex justify-center items-center">
-				<span className="loading loading-spinner text-info"></span>
-			</div>}>
+			<>
 				<Header/>
-				<div className={classnames({
-					'flex h-full justify-center items-center pt-16 bg-base-50': true,
-					'px-8': isAuth,
-				})}>
+				<div className="flex h-full justify-center items-center no-scrollbar">
 					{!!toasts?.length && <div className="fixed top-0 left-0 z-50">
             <div className="toast toast-top toast-center w-full max-w-[1200px] whitespace-normal px-8">
 							{toasts.map(toast =>
@@ -51,7 +45,7 @@ export const Route = createRootRouteWithContext<{
 					<ScrollRestoration/>
 					<Outlet/>
 				</div>
-			</Suspense>
+			</>
 		)
 	}
 })

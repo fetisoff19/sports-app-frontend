@@ -1,10 +1,10 @@
 import {useWorkoutRename, WorkoutItem} from '@/entities/workout'
-import {SERVER_URL} from '@/shared/api'
 import {Indicator} from '@/shared/types'
 import {firstCapitalLetter, orderItemValues, paramNames, prepareValues, units} from '@/shared/lib'
 import {IconGenerator, Modal} from '@/shared/ui'
 import {Link} from '@tanstack/react-router'
 import {useState} from 'react'
+import {useGetMapImage} from '@/entities/workout/api/queries/use-get-map-image.ts'
 
 type Props = {
 	data: WorkoutItem,
@@ -15,9 +15,7 @@ type Props = {
 export const Card = ({data, isLoading}: Props) => {
 	const [note, setNote] = useState<string | null>(data.note)
 	const {mutate: rename} = useWorkoutRename()
-	
-	const src = `${SERVER_URL}/${data.map}`
-	
+	const {img, imgIsLoading} = useGetMapImage(data.map)
 	const indicators: Indicator[] | undefined = orderItemValues.map((item) => {
 		const value = Number(data?.[item as keyof WorkoutItem] || 0)
 		return ({
@@ -84,9 +82,8 @@ export const Card = ({data, isLoading}: Props) => {
 				</div>
 			</div>
 			<div className="flex items-center ">
-				<div className={`${isLoading ? skeleton(0, 0) : 'no-map'} sm:w-52 sm:h-52 w-64`}>
-					{data.map &&
-            <img src={src} alt={data?.name} className="rounded-xl filter"/>}
+				<div className={`${(isLoading || imgIsLoading) ? 'skeleton' : 'no-map'} sm:w-52 sm:h-52 w-64`}>
+					{img && <img src={img} alt={data?.name} className="rounded-xl filter"/>}
 				</div>
 			</div>
 			<Modal id={data.uuid + 'editNote'} text={'Enter notes'} handleConfirm={handleRenameClick}>

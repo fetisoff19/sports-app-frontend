@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect} from 'react'
+import {RefObject, useCallback, useEffect} from 'react'
 
 export const useObserver = (
-	observerElem: React.RefObject<HTMLElement>,
+	observerElem: RefObject<HTMLElement>,
 	fetchNextPage: () => void,
 	hasNextPage: boolean | unknown,
 ) => {

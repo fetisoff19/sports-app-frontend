@@ -11,13 +11,13 @@ import {
 	sports,
 	units
 } from '@/shared/lib'
-import {getDateAndValueArray} from '@/shared/lib/helpers/date-service.ts'
-import {DateAndValue} from '@/shared/types'
+import {DateService} from '@/shared/lib/'
+import {DateValueCount} from '@/shared/types'
 import {Dropdown} from '@/shared/ui'
+import dayjs from 'dayjs'
 
 type Props = {
 	data: { workouts: ChartStats[], start: string, end: string } | undefined
-	isLoading: boolean
 	param: keyof ChartStats | 'power_curve'
 	setParam: Dispatch<SetStateAction<keyof ChartStats | 'power_curve'>>
 	powerCurve: { powerCurve: Record<string, number>, start: string, end: string } | undefined
@@ -29,10 +29,10 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 	
 	useEffect(() => {
 		if (data && param !== 'power_curve') {
-			const period: DateAndValue[] = getDateAndValueArray(data.start, data.end)
+			const period: DateValueCount[] = DateService.getDateValueCountArray(data.start, data.end)
 			
 			for (const workout of data.workouts) {
-				const last = period.findLast((elem: DateAndValue) => elem.date <= new Date(workout.date).getTime())
+				const last = period.findLast((elem: DateValueCount) => elem.date <= dayjs(workout.date).valueOf())
 				if ((Number(workout?.[param]) > 0 || param === 'uuid') && last) {
 					const value = param === 'uuid' ? 1 : Number(workout?.[param])
 					switch (param) {
@@ -104,7 +104,7 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 	
 	const chartOptions: Highcharts.Options = {
 		...chartsBaseOptions,
-		series: [{data: points, type: powerCurve && param === 'power_curve' ? 'line' : 'column'}],
+		series: [{data: points, type: powerCurve && param === 'power_curve' ? 'areaspline' : 'column', color: '#0989dc'}],
 		xAxis: {
 			...chartsBaseOptions.xAxis,
 			type: powerCurve && param === 'power_curve' ? 'linear' : 'datetime',

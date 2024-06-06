@@ -8,12 +8,12 @@ import {firstCapitalLetter} from '@/shared/lib'
 
 export const View = () => {
 	const {uuid} = useParams({strict: false})
-	const {data} = useSuspenseQuery(useWorkoutGetOne(uuid))
+	const {data, isLoading} = useSuspenseQuery(useWorkoutGetOne(uuid))
 	const [index, setIndex] = useState<number>(0)
 	
-	if (!data) {
+	if (!data && !isLoading) {
 		return (
-			<div className="flex flex-col justify-center items-center pt-16 gap-2">
+			<div className="flex flex-col justify-center items-center pt-16 gap-2 py-8 ">
 				<div className="text-xl">Ups... Workout Not Found!</div>
 				<Link className="link hover:text-white text-lg" to={`/`}>{'To Overview -->'}</Link>
 			</div>
@@ -31,9 +31,9 @@ export const View = () => {
 		}
 	}
 	
-	return (
+	if (data) return (
 		<div
-			className="lg:flex-row-reverse flex flex-col justify-items-center gap-8 py-8 h-full w-full xl:w-[1200px] sm:w-[600px] lg:w-full">
+			className="lg:flex-row-reverse flex flex-col justify-items-center gap-8 padding h-full w-full xl:w-[1200px] sm:w-[600px] lg:w-full">
 			<div
 				className="flex flex-col rounded-xl bg-base-100 gap-4 p-4 h-fit  sm:p-8 min-w-[320px] w-full lg:basis-2/5 shadow-xl">
 				<div className="flex flex-col gap-2 justify-between">

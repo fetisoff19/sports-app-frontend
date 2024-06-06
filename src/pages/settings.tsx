@@ -38,7 +38,7 @@ const Settings = () => {
 	
 	return (
 		<>
-			<div className="flex flex-col justify-items-center gap-8 pt-16 xl:w-[1200px]">
+			<div className="flex flex-col justify-items-center gap-8 padding xl:w-[1200px]">
 				<h3 className="text-2xl">Settings</h3>
 				<SettingsCard
 					title={'Change password'}

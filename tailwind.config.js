@@ -16,10 +16,10 @@ export default {
   ],
   daisyui: {
     themes: [
-      'dim',
+      'dark',
       {
-        dim: {
-          ...import('daisyui/src/theming/themes')['dim'],
+        dark: {
+          ...import('daisyui/src/theming/themes')['dark'],
           'success': '#4ADE80FF',
           'neutral': '#35363A',
           'base-100': '#1c1c1e',

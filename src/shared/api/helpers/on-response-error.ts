@@ -2,6 +2,7 @@ import {AxiosError} from 'axios'
 import {updateUser} from '@/entities/auth/model'
 import {addNotify} from '@/entities/notify'
 import {redirect} from '@tanstack/react-router'
+import {SERVER_URL} from '@/shared/api'
 
 
 export const onResponseError = async (
@@ -13,7 +14,8 @@ export const onResponseError = async (
 		})
 		updateUser(null)
 		localStorage.removeItem('token')
-	} else if (error.response?.status !== 422) {
+	} else if (error.response?.status !== 422 && error.config?.baseURL?.includes(SERVER_URL)) {
+		// without upload files and get map image
 		const message = error.response?.data?.message || error?.message
 		addNotify({type: 'error', message: `An error has occurred: ${message}`}, 5000)
 	}

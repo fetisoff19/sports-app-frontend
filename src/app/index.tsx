@@ -5,6 +5,7 @@ import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import '@/app/index.css'
 import {DefaultCatchBoundary} from '@/pages/error.tsx'
 import {NotFound} from '@/pages/not-found.tsx'
+import {PendingComponent} from '@/shared/ui'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -22,6 +23,7 @@ const router = createRouter({
 	},
 	defaultErrorComponent: DefaultCatchBoundary,
 	defaultNotFoundComponent: NotFound,
+	defaultPendingComponent: PendingComponent,
 	defaultPreload: 'intent',
 	defaultPreloadStaleTime: 0,
 })

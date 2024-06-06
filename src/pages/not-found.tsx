@@ -3,7 +3,7 @@ import {Link} from '@tanstack/react-router'
 export function NotFound() {
 	
 	return (
-		<div className="p-8 flex flex-col justify-items-center gap-4">
+		<div className="padding flex flex-col justify-items-center gap-4">
 			<div className="text-gray-400">
 				<p>The page you are looking for does not exist.</p>
 			</div>

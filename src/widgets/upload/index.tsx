@@ -116,7 +116,7 @@ export const Upload = () => {
 					/>
 				</div>
 			</div>
-			<div className="overflow-x-auto h-44 sm:h-72 w-full">
+			<div className="overflow-x-auto h-44 sm:h-72 w-full overflow-y-auto scroll">
 				<table className="table table-sm table-zebra">
 					<thead/>
 					<tbody>
