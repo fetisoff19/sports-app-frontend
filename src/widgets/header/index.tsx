@@ -3,7 +3,7 @@ import {DesktopMenu, DesktopMenuButton, MobileMenu, MobileMenuIcon, UploadProgre
 
 export const Header = () => {
 	return (
-		<div className="navbar bg-base-100 drawer fixed z-10 shadow-2xl gap-4">
+		<div className="navbar bg-base-100 drawer fixed shadow-2xl gap-4 z-20">
 			<MobileMenuIcon/>
 			<MobileMenu/>
 			<div className="flex-0">

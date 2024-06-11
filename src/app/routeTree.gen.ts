@@ -21,7 +21,6 @@ import { Route as ViewUuidImport } from './router/view.$uuid'
 const WorkoutsLazyImport = createFileRoute('/workouts')()
 const StatsLazyImport = createFileRoute('/stats')()
 const SettingsLazyImport = createFileRoute('/settings')()
-const LoginLazyImport = createFileRoute('/login')()
 
 // Create/Update Routes
 
@@ -39,11 +38,6 @@ const SettingsLazyRoute = SettingsLazyImport.update({
   path: '/settings',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./router/settings.lazy').then((d) => d.Route))
-
-const LoginLazyRoute = LoginLazyImport.update({
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./router/login.lazy').then((d) => d.Route))
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -64,13 +58,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
     '/settings': {
@@ -108,7 +95,6 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  LoginLazyRoute,
   SettingsLazyRoute,
   StatsLazyRoute,
   WorkoutsLazyRoute,

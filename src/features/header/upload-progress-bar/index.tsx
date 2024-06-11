@@ -5,6 +5,7 @@ import {useStore} from '@tanstack/react-store'
 import {UPLOAD} from '@/entities/workout'
 import {Modal} from '@/shared/ui'
 import {Upload} from '@/widgets/upload'
+import {openModal} from '@/shared/lib'
 
 export const UploadProgressBar = () => {
 	const files = useStore(notifyStore, state => state.files)
@@ -18,12 +19,6 @@ export const UploadProgressBar = () => {
 		}
 	}
 	
-	function openModal() {
-		const dialog = document.getElementById(UPLOAD) as HTMLDialogElement | null
-		if (dialog) {
-			dialog.showModal()
-		}
-	}
 	
 	return (
 		<>
@@ -35,7 +30,7 @@ export const UploadProgressBar = () => {
 				})} onClick={clearFileList}>
           <ClearIcon/>
         </div>
-        <div className="btn btn-ghost p-2 no-animation" onClick={openModal}>
+        <div className="btn btn-ghost p-2 no-animation" onClick={() => openModal(UPLOAD)}>
           <progress className="progress w-32 sm:w-40" value={status} max="100"/>
         </div>
       </div>}

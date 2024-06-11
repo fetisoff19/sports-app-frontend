@@ -6,8 +6,7 @@ import {useStore} from '@tanstack/react-store'
 import {authStore} from '@/entities/auth/model'
 import {ChangePassword} from '@/features/change-password'
 import {useChangePassword, useDeleteUser} from '@/entities/auth/api/queries'
-
-type Actions = 'delete-all-workouts' | 'delete-account' | 'change-password'
+import {openModal} from '@/shared/lib'
 
 const Settings = () => {
 	const [currentPassword, setCurrentPassword] = useState<string>('')
@@ -19,14 +18,6 @@ const Settings = () => {
 	const {mutate: deleteAll} = useWorkoutDeleteAll()
 	const {mutate: changePassword} = useChangePassword()
 	const {mutate: deleteUser} = useDeleteUser()
-	
-	
-	function openModal(type: Actions) {
-		const dialog = document.getElementById(type) as HTMLDialogElement | null
-		if (dialog) {
-			dialog.showModal()
-		}
-	}
 	
 	function closeModal() {
 		const dialog = document.activeElement as HTMLLinkElement
@@ -40,9 +31,9 @@ const Settings = () => {
 		<>
 			<div className="flex flex-col justify-items-center gap-8 padding xl:w-[1200px]">
 				<h3 className="text-2xl">Settings</h3>
-				<SettingsCard
-					title={'Change password'}
-					btnText={'Change password'} btnError={false} onClick={() => openModal('change-password')}/>
+				{user?.provider === 'email' && <SettingsCard
+          title={'Change password'}
+          btnText={'Change password'} btnError={false} onClick={() => openModal('change-password')}/>}
 				<SettingsCard
 					title={'Delete All Workouts'}
 					disabled={!user?.workoutCount}

@@ -4,6 +4,7 @@ import {useLogout} from '@/entities/auth/api/queries'
 import {useStore} from '@tanstack/react-store'
 import {authStore} from '@/entities/auth/model'
 import {UserImage} from '@/features/header/user-image'
+import {openModal} from '@/shared/lib'
 
 export const MobileMenu = () => {
 	const user = useStore(authStore, (state) => state.user)
@@ -14,13 +15,6 @@ export const MobileMenu = () => {
 		refetch()
 		handleDrawerClick()
 		handleDropdownClick()
-	}
-	
-	function openModal() {
-		const dialog = document.getElementById(UPLOAD) as HTMLDialogElement | null
-		if (dialog) {
-			dialog.showModal()
-		}
 	}
 	
 	function handleDropdownClick() {
@@ -57,7 +51,7 @@ export const MobileMenu = () => {
 					</Link>
 				</li>
 				<li onClick={handleDrawerClick} className="sm:hidden">
-					<a className="p-3" onClick={openModal}>
+					<a className="p-3" onClick={() => openModal(UPLOAD)}>
 						Add Workout
 					</a>
 				</li>

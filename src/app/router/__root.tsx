@@ -14,13 +14,14 @@ export const Route = createRootRouteWithContext<{
 	component: () => {
 		const toasts = useStore(notifyStore, state => state.toasts)
 		const isAuth = useStore(authStore, (state) => state.isAuth)
+		const user = useStore(authStore, (state) => state.user)
 		const {refetch} = useAuth()
 		
 		useEffect(() => {
-			if (isAuth) {
+			if (isAuth && !user) {
 				refetch()
 			}
-		}, [isAuth, refetch])
+		}, [user, isAuth, refetch])
 		
 		return (
 			<>

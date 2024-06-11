@@ -11,7 +11,7 @@ export function useLogout() {
 			updateUser(null)
 			localStorage.removeItem('token')
 			redirect({
-				to: '/login',
+				to: '/',
 				throw: true,
 			})
 			return true

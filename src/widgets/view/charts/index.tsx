@@ -35,7 +35,7 @@ export const Charts = ({data, setIndex}: Props) => {
 	useEffect(() => {
 		if (data?.chartData?.points.length) {
 			const compressionCoef =
-				!isDesktop && data.chartData.points.length > 1000 ? Math.round(data.chartData?.points.length / 1000) :
+				!isDesktop && data.chartData.points.length > 600 ? Math.round(data.chartData?.points.length / 600) :
 					1
 			const charts: ChartData = {
 				p: {points: [], min: 0, max: 0, avg: 0},

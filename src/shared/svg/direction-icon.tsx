@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const DirectionUpIcon: React.FC = () => {
+export const DirectionIcon: React.FC = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

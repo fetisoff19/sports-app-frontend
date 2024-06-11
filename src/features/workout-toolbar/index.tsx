@@ -1,9 +1,10 @@
 import {ChangeEvent, useEffect, useState} from 'react'
 import {paramNames, sortParams, sportNames, useDebounce} from '@/shared/lib'
-import {ClearIcon, DirectionDownIcon, DirectionUpIcon, SearchIcon} from '@/shared/svg'
+import {ClearIcon, DirectionIcon, SearchIcon} from '@/shared/svg'
 import {Dropdown} from '@/shared/ui'
 import {setDirection, setName, setParam, setSport, workoutsStore} from '@/entities/workout'
 import {useStore} from '@tanstack/react-store'
+import classnames from 'classnames'
 
 type Props = {
 	sportsList: string[]
@@ -69,9 +70,12 @@ export const WorkoutToolbar = ({sportsList}: Props) => {
 				</label>
 			</div>
 			<div className="flex  flex-row gap-4 justify-between md:justify-center">
-				<label className="swap btn btn-ghost bg-base-100 rounded-2xl group shadow-xl">
+				<label className={classnames({
+					'swap btn btn-ghost bg-base-100 rounded-2xl group shadow-xl': true,
+					'scale-y-[-1]': direction !== 'DESC'
+				})}>
 					<input type="checkbox" onChange={handleDirectionChange}/>
-					{direction == 'DESC' ? <DirectionDownIcon/> : <DirectionUpIcon/>}
+					<DirectionIcon/>
 				</label>
 				<Dropdown valueList={filteredParamFields()} setValue={setParam} value={param} fields={paramNames}/>
 				<Dropdown valueList={sportsList} setValue={setSport} value={sport} fields={sportNames} btnSuccess={true}/>

@@ -3,6 +3,7 @@ import {ThreeDotsIcon} from '@/shared/svg'
 import {Modal} from '@/shared/ui'
 import {useState} from 'react'
 import {useLocation} from '@tanstack/react-router'
+import {openModal} from '@/shared/lib'
 
 type Props = {
 	data: Pick<WorkoutItem | WorkoutFromDb, 'name' | 'uuid' | 'note'>
@@ -34,13 +35,6 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 			window.history.back()
 		}
 		handleDropdownClick()
-	}
-	
-	function openModal(type: Actions) {
-		const dialog = document.getElementById(data.uuid + type) as HTMLDialogElement | null
-		if (dialog) {
-			dialog.showModal()
-		}
 	}
 	
 	

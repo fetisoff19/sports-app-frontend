@@ -10,7 +10,7 @@ export const onResponseError = async (
 ): Promise<AxiosError> => {
 	if (error.response?.status === 401) {
 		redirect({
-			to: '/login',
+			to: '/',
 		})
 		updateUser(null)
 		localStorage.removeItem('token')

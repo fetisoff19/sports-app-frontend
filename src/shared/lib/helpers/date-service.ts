@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 
 
 export class DateService {
+	
 	public static getDateValueCountArray(start: string, end: string): DateValueCount[] {
 		const firstDay = dayjs(start)
 		const lastDay = dayjs(end)

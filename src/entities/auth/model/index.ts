@@ -1,7 +1,9 @@
 import {Store} from '@tanstack/react-store'
+import {PROVIDER_TYPE} from '@/shared/types'
 
 export type User = {
-	email: string
+	email: string | null
+	provider: PROVIDER_TYPE
 	login: string
 	image: string
 	workoutCount: number
@@ -9,7 +11,6 @@ export type User = {
 
 export const QUERY_KEY_LOGIN = 'LOGIN'
 export const QUERY_KEY_LOGOUT = 'LOGOUT'
-
 
 type State = {
 	isAuth: boolean,
@@ -20,6 +21,7 @@ export const authStore = new Store<State>({
 	isAuth: !!localStorage.getItem('token'),
 	user: null,
 })
+
 
 export const updateUser = (user: User | null) => {
 	authStore.setState((state) => {
