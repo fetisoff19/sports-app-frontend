@@ -1,6 +1,7 @@
-import {orderCyclingValues, orderRunningValues, paramNames, prepareValues, units} from '@/shared/lib'
+import {paramNames, prepareValues, units} from '@/shared/lib'
 import {Indicator} from '@/shared/types'
 import {Session, WorkoutFromDb} from '@/entities/workout'
+import {orderCyclingValues, orderRunningValues} from './lib/constants.ts'
 
 type Props = {
 	session: WorkoutFromDb['session'] | undefined | null
@@ -26,7 +27,7 @@ export const ViewMainStats = ({session}: Props) => {
 	
 	return (
 		<div className="flex flex-1 items-center w-full">
-			<div className="grid grid-cols-2 md:grid-cols-3 gap-3 justify-between w-full">
+			<div className="grid grid-cols-2 sm:grid-cols-3 gap-3 justify-between w-full">
 				{Stats}
 			</div>
 		</div>

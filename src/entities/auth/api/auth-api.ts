@@ -26,11 +26,22 @@ export class AuthApi {
 		return api.get(PATH + 'logout')
 	}
 	
-	static async changePassword(data: { current: string, new: string }): Promise<boolean> {
+	static async changePassword(data: { current?: string, new: string, token?: string }): Promise<boolean> {
+		if (data.token) {
+			return api.patch(PATH, data, {
+				headers: {
+					authorization: `Bearer ${data.token}`
+				}
+			})
+		}
 		return api.patch(PATH, data)
 	}
 	
 	static async deleteUser(): Promise<boolean> {
 		return api.delete(PATH)
+	}
+	
+	static async passwordRecovery(data: Omit<QueryData, 'password'>): Promise<boolean> {
+		return api.post(PATH + 'password-recovery', data)
 	}
 }

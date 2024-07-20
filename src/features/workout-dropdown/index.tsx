@@ -10,8 +10,6 @@ type Props = {
 	withEditNotes?: boolean
 }
 
-type Actions = 'delete' | 'rename' | 'editNote'
-
 
 export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 	const {mutate: rename} = useWorkoutRename()
@@ -38,7 +36,7 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 	}
 	
 	
-	const handleDropdownClick = (type?: Actions) => {
+	const handleDropdownClick = (type?: string) => {
 		type && openModal(type)
 		const elem = document.activeElement as HTMLLinkElement
 		if (elem) {
@@ -61,10 +59,10 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 					{withEditNotes && <li onClick={() => handleDropdownClick('editNote')}>
             <a className="p-3 rounded-xl hover:text-white">{data.note?.length ? 'Edit Notes' : 'Add Notes'}</a>
           </li>}
-					<li onClick={() => handleDropdownClick('rename')}>
+					<li onClick={() => handleDropdownClick(data.uuid + 'rename')}>
 						<a className="p-3 rounded-xl hover:text-white">Rename</a>
 					</li>
-					<li onClick={() => handleDropdownClick('delete')}>
+					<li onClick={() => handleDropdownClick(data.uuid + 'delete')}>
 						<a className="p-3 rounded-xl hover:text-white">Delete</a>
 					</li>
 				</ul>

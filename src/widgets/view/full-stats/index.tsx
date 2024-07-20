@@ -14,11 +14,12 @@ export const ViewFullStats = ({session}: Props) => {
 	const Columns = orderValues.map((item, index) => {
 		const orderFields = fullStatsFields.find((f) => f.label === item)
 		const indicators: Indicator[] | undefined = orderFields?.fields.map((item: string) => {
-			const quantity = Number(session?.[item as string as keyof Session]) || 0
-			const value = prepareValues?.[item] ? prepareValues?.[item](quantity) : null
+			const value = session?.[item as string | number as keyof Session]
+			const quantity = Number(value) || null
+			const time = item.includes('time') && value ? new Date(value).getTime() : null
 			return ({
 				field: fullStatsLabels[item],
-				value,
+				value: (quantity || time) && prepareValues?.[item] ? prepareValues?.[item](quantity || time) : null,
 			})
 		}).filter(elem => elem.value)
 		const stats = indicators?.map((item, index) =>

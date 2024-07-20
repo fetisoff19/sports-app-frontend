@@ -2,7 +2,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {ChartsIcon, TableIcon} from '@/shared/svg'
 import {Dropdown} from '@/shared/ui'
 import {SportStats} from '@/entities/stats'
-import {curDate, day, sportNames, sports} from '@/shared/lib'
+import {sportNames, sports} from '@/shared/lib'
 import DatePicker, {DateObject} from 'react-multi-date-picker'
 import DatePanel from 'react-multi-date-picker/plugins/date_panel'
 import 'react-multi-date-picker/styles/backgrounds/bg-dark.css'
@@ -30,10 +30,12 @@ export const StatsToolbar = ({data, isTable, setIsTable, sport, setSport, dates,
 		'All Time'
 	]
 	
-	
 	useEffect(() => {
 		const pastDate: number = Math.min(...(data?.map(({first}) => new Date(first).getTime()) || []), Math.pow(10, 13))
 		const date = new DateObject()
+		const curDate = new Date().getTime()
+		const day = 24 * 3600 * 1000
+		
 		switch (period) {
 			case 'Week':
 				setDates(() => [new DateObject(new Date(curDate - (day * 7))), date])

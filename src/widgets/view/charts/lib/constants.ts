@@ -1,5 +1,5 @@
 import Highcharts from 'highcharts'
-import {chartsBaseOptions, getHourMinSec, prepareValues, units} from '@/shared/lib'
+import {chartsBaseOptions, prepareValues, units} from '@/shared/lib'
 import {Session} from '@/entities/workout'
 
 export const baseSeries: {
@@ -26,9 +26,8 @@ export const powerCurveOption: Highcharts.Options = {
 			},
 			formatter:
 				function () {
-					return Number(this.value) < 60
-						? this.value.toString()
-						: getHourMinSec(Number(this.value)).toString()
+					const value = Number(this.value)
+					return value < 60 ? this.value.toString() : prepareValues.ts(value)
 				},
 		},
 	},
@@ -46,7 +45,7 @@ export const powerCurveOption: Highcharts.Options = {
 		...chartsBaseOptions.tooltip,
 		formatter: function () {
 			const x = Number(this.x)
-			const timestamp = x < 60 ? (this.x + ' c') : getHourMinSec(x)
+			const timestamp = x < 60 ? (this.x + ' c') : prepareValues.ts(x)
 			const value = (this.y ? prepareValues['p'](this.y) : this.y)
 			const unit = units['p']
 			return `<span class='text-white text-sm' >${value} ${unit}, ${timestamp}</span>`

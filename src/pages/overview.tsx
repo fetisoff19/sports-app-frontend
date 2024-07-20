@@ -1,13 +1,13 @@
-import {useWorkoutGetSome, workoutsStore} from '@/entities/workout'
+import {mockWorkout, useWorkoutGetSome, workoutsStore} from '@/entities/workout'
 import {useMemo, useRef} from 'react'
 import {useObserver} from '@/shared/lib/hooks'
-import {mockWorkout, QueryLimit} from '@/shared/lib'
 import {OverviewToolbar} from '@/features/overview-toolbar'
 import {authStore} from '@/entities/auth/model'
 import {useStore} from '@tanstack/react-store'
 import {Observer} from '@/shared/ui'
 import {Card} from '@/widgets/overview-card'
 import {AddFirstWorkout} from '@/features/add-first-workout'
+import {QueryLimit} from '@/shared/api'
 
 
 const Overview = () => {

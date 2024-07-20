@@ -33,7 +33,8 @@ export const Register = ({setRegister}: Props) => {
 				<div className="flex flex-col gap-4">
 					<label className="input flex items-center gap-2 border-none">
 						<EmailIcon/>
-						<input type="text" className="min-w-24 text-sm" placeholder="Email" value={email} required={true}
+						<input type="email" className="min-w-24 text-sm" placeholder="Email" value={email} required
+						       pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
 						       onChange={(e) => setEmail(e.target.value)}/>
 					</label>
 					<label className="input flex items-center gap-2 border-none">
@@ -43,9 +44,6 @@ export const Register = ({setRegister}: Props) => {
 						       onChange={(e) => setPassword(e.target.value)}/>
 					</label>
 				</div>
-				<div className="link disabled hover:text-white pointer-events-none text-gray-600">
-					Forgot password?
-				</div>
 				<button className="btn btn-success btn-wide rounded-2xl" type="submit">Sign Up!</button>
 			</form>
 			<div className="">
@@ -54,20 +52,6 @@ export const Register = ({setRegister}: Props) => {
 				>Log In!
 				</a>
 			</div>
-			{/*<div className="flex flex-col gap-2">*/}
-			{/*	<button className="btn btn-outline outline-8 btn-wide rounded-2xl btn-disabled saturate-0">*/}
-			{/*		<GoogleIcon/>*/}
-			{/*		Continue with Google*/}
-			{/*	</button>*/}
-			{/*	<button className="btn btn-outline outline-8 btn-wide rounded-2xl group btn-disabled saturate-0">*/}
-			{/*		<GithubIcon/>*/}
-			{/*		Continue with Github*/}
-			{/*	</button>*/}
-			{/*</div>*/}
-			{/*<div className="text-gray-600">*/}
-			{/*	Would you like to inspect app?*/}
-			{/*</div>*/}
-			{/*<button className="btn btn-success btn-wide rounded-2xl btn-disabled">View App</button>*/}
 		</div>
 	)
 }

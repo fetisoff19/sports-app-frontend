@@ -1,7 +1,8 @@
 import {useWorkoutRename, WorkoutItem} from '@/entities/workout'
 import {Indicator} from '@/shared/types'
-import {firstCapitalLetter, orderItemValues, paramNames, prepareValues, units} from '@/shared/lib'
+import {firstCapitalLetter, orderItemValues, paramNames, units} from '@/shared/lib'
 import {IconGenerator, Modal} from '@/shared/ui'
+import {prepareValues} from '@/shared/lib/helpers'
 import {Link} from '@tanstack/react-router'
 import {useState} from 'react'
 import {STATIC_URL} from '@/shared/api'
@@ -86,12 +87,15 @@ export const Card = ({data, isLoading}: Props) => {
 				</div>
 			</div>
 			<div className="flex items-center ">
-				<div
+				<Link
+					to="/view/$uuid"
+					disabled={!data.uuid}
+					params={{uuid: data.uuid}}
 					className={`${(isLoading || (data.map && imgIsLoading && !imgIsError)) ? 'skeleton' : 'no-map'} sm:w-52 sm:h-52 w-64`}>
 					{!imgIsError && data.map &&
             <img src={src} alt={data?.name} className="rounded-xl filter" onLoad={() => setImgLoading(false)}
                  onError={() => setImgError(true)}/>}
-				</div>
+				</Link>
 			</div>
 			<Modal id={data.uuid + 'editNote'} text={'Enter notes'} handleConfirm={handleRenameClick}>
 				<textarea

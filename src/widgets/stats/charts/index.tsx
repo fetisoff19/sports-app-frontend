@@ -2,19 +2,12 @@ import {ChartStats} from '@/entities/stats'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import {Dispatch, SetStateAction, useEffect, useState} from 'react'
-import {
-	ButtonFieldsForStats,
-	chartsBaseOptions,
-	getHourMinSec,
-	paramNames,
-	prepareValues,
-	sports,
-	units
-} from '@/shared/lib'
+import {ButtonFieldsForStats, chartsBaseOptions, paramNames, sports, units} from '@/shared/lib'
 import {DateService} from '@/shared/lib/'
 import {DateValueCount} from '@/shared/types'
 import {Dropdown} from '@/shared/ui'
 import dayjs from 'dayjs'
+import {prepareValues} from '@/shared/lib/helpers'
 
 type Props = {
 	data: { workouts: ChartStats[], start: string, end: string } | undefined
@@ -60,14 +53,15 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 			}
 			
 			const dataForChart: [number, number][] = period.map(elem => {
-				if (param.includes('avg') && elem.counter > 1) {
-					return [elem.date, elem.value / elem.counter]
-				}
 				if (param === 'uuid') {
 					return [elem.date, elem.counter]
 				}
+				if (param.includes('avg') && elem.counter > 1) {
+					return [elem.date, elem.value / elem.counter]
+				}
 				return [elem.date, elem.value]
 			})
+			
 			setPoints(() => dataForChart)
 		}
 	}, [data, param])
@@ -113,8 +107,9 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 					color: '#9A9FA3'
 				},
 				formatter: powerCurve && param === 'power_curve' ?
-					function () {
-						return Number(this.value) < 60 ? this.value.toString() : getHourMinSec(Number(this.value)).toString()
+					function (): string {
+						const value = Number(this.value)
+						return value < 60 ? this.value.toString() : prepareValues.ts(value)
 					} : undefined,
 			},
 		},
@@ -127,7 +122,7 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 			formatter: function () {
 				if (powerCurve && param === 'power_curve') {
 					const x = Number(this.x)
-					const timestamp = x < 60 ? (this.x + ' c') : getHourMinSec(x)
+					const timestamp = x < 60 ? (this.x + ' c') : prepareValues.ts(x)
 					const value = (prepareValues?.[param] && this.y ? prepareValues?.[param](this.y) : this.y)
 					const unit = units?.[param] || ''
 					return `<span class='text-white text-sm' >${value} ${unit}, ${timestamp}</span>`

@@ -4,7 +4,7 @@ import {authStore} from '@/entities/auth/model'
 export const UserImage = () => {
 	const user = useStore(authStore, (state) => state.user)
 	
-	if (user?.image) {
+	if (user?.image?.length) {
 		return (
 			<img alt="user avatar" src={user.image}/>
 		)

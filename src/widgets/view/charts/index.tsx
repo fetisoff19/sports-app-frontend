@@ -1,7 +1,7 @@
 import {ChartPoint, Workout} from '@/entities/workout'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
-import {chartsBaseOptions, getHourMinSec, prepareValues, units, useDesktopDetection} from '@/shared/lib'
+import {chartsBaseOptions, prepareValues, units, useDesktopDetection} from '@/shared/lib'
 import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 import {
 	avgCyclingKeys,
@@ -57,9 +57,8 @@ export const Charts = ({data, setIndex}: Props) => {
 							if (type && data.chartData?.points?.at(-1)?.d) {
 								return this.value + ' km'
 							}
-							return Number(this.value) < 60
-								? this.value.toString()
-								: getHourMinSec(Number(this.value)).toString()
+							const value = Number(this.value)
+							return value < 60 ? this.value.toString() : prepareValues.ts(value)
 						}
 				},
 			}

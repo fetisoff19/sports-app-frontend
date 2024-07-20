@@ -33,9 +33,9 @@ export const View = () => {
 	
 	if (data) return (
 		<div
-			className="lg:flex-row-reverse flex flex-col justify-items-center gap-8 padding h-full w-full xl:w-[1200px] sm:w-[600px] lg:w-full">
+			className="lg:flex-row-reverse flex flex-col justify-items-center gap-8 padding h-full w-96 xl:w-[1200px] sm:w-[600px] lg:w-full">
 			<div
-				className="flex flex-col rounded-xl bg-base-100 gap-4 p-4 h-fit  sm:p-8 min-w-[320px] w-full lg:basis-2/5 shadow-xl">
+				className="flex flex-col rounded-xl bg-base-100 gap-4 p-4 h-fit sm:p-8 min-w-[320px] w-full lg:basis-2/5 shadow-xl">
 				<div className="flex flex-col gap-2 justify-between">
 					<div className="flex gap-2 justify-between">
 						<div className="flex flex-col gap-2">
@@ -56,7 +56,9 @@ export const View = () => {
 					</div>
 				</div>
 				<ViewMainStats session={data.session}/>
-				<Map points={data?.polyline?.points} index={index}/>
+				<div className="hidden lg:block">
+					<Map points={data?.polyline?.points} index={index}/>
+				</div>
 				<ViewFullStats session={data.session}/>
 				<div className="text-xs stat-title">
 					{data?.device.length ? `Device: ${firstCapitalLetter(data?.device)}` : ''}
@@ -64,6 +66,9 @@ export const View = () => {
 			</div>
 			<div
 				className="rounded-xl  bg-base-100 flex-col gap-8 p-4 sm:p-8 h-full w-full min-w-[320px] lg:basis-3/5 shadow-xl">
+				<div className="lg:hidden">
+					<Map points={data?.polyline?.points} index={index}/>
+				</div>
 				<Charts data={data} setIndex={setIndex}/>
 			</div>
 		</div>

@@ -1,14 +1,14 @@
-import {useWorkoutGetSome, workoutsStore} from '@/entities/workout'
+import {mockWorkout, useWorkoutGetSome, workoutsStore} from '@/entities/workout'
 import {useObserver} from '@/shared/lib/hooks'
 import {useMemo, useRef} from 'react'
 import {useStore} from '@tanstack/react-store'
 import {authStore} from '@/entities/auth/model'
-import {mockWorkout, QueryLimit} from '@/shared/lib'
 import {WorkoutToolbar} from '@/features/workout-toolbar'
 import {Observer} from '@/shared/ui'
 import {ListItem} from '@/widgets/list-item'
 import {AddFirstWorkout} from '@/features/add-first-workout'
 import {useStatsGetMain} from '@/entities/stats'
+import {QueryLimit} from '@/shared/api'
 
 
 const Workouts = () => {
@@ -38,7 +38,7 @@ const Workouts = () => {
 		: []
 	
 	return (
-		<div className="flex flex-col justify-items-center gap-8 padding xl:w-[1200px]">
+		<div className="flex flex-col justify-items-center gap-8 padding xl:w-[1200px] w-96 sm:w-full">
 			<WorkoutToolbar sportsList={sportsList}/>
 			{user?.workoutCount === 0 ? <AddFirstWorkout/> :
 				<>

@@ -1,10 +1,11 @@
 import {WorkoutItem, workoutsStore} from '@/entities/workout'
 import {Indicator} from '@/shared/types'
-import {firstCapitalLetter, orderItemValues, paramNames, prepareValues, units} from '@/shared/lib'
+import {firstCapitalLetter, orderItemValues, paramNames, units} from '@/shared/lib'
 import {IconGenerator} from '@/shared/ui'
 import {Link} from '@tanstack/react-router'
 import {WorkoutDropdown} from '@/features/workout-dropdown'
 import {useStore} from '@tanstack/react-store'
+import {prepareValues} from '@/shared/lib/helpers'
 
 type Props = {
 	data: WorkoutItem,

@@ -17,6 +17,9 @@ export * from './time-icon.tsx'
 export * from './distance-icon.tsx'
 export * from './email-icon.tsx'
 export * from './point-icon.tsx'
+export * from './hiking-icon.tsx'
+export * from './gym-icon.tsx'
+export * from './other-sports-icon.tsx'
 
 
 

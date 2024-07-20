@@ -1,7 +1,8 @@
 import {useInfiniteQuery} from '@tanstack/react-query'
 import {QUERY_KEY_SOME_WORKOUTS, WorkoutApiParam} from '@/entities/workout'
 import {WorkoutApi} from '@/entities/workout/api/workout-api'
-import {QueryLimit} from '@/shared/lib'
+
+import {QueryLimit} from '@/shared/api'
 
 export function useWorkoutGetSome(type: 'OVERVIEW' | 'WORKOUTS', params: Omit<WorkoutApiParam, 'limit' | 'offset'>) {
 	const {

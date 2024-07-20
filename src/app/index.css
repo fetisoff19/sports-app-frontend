@@ -112,6 +112,10 @@ body {
   display: none;
 }
 
+.leaflet-container {
+  border-radius: 0.75rem;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -121,7 +125,7 @@ input:-webkit-autofill:active {
 }
 
 
-/* fix chromium-bug: https://github.com/highcharts/highcharts/issues/21144*/
+/*  highcharts fix chromium-bug: https://github.com/highcharts/highcharts/issues/21144*/
 .charts {
   pointer-events: fill;
 }
@@ -130,7 +134,7 @@ input:-webkit-autofill:active {
 /*date picker*/
 .bg-dark.rmdp-wrapper, .rmdp-month-picker, .rmdp-year-picker,
 .rmdp-container::after {
-  margin-top: 10px;
+  margin-top: 0.5rem;
   background: #1c1c1e !important;
   font: inherit;
   border-radius: 0.5rem;
@@ -147,7 +151,7 @@ input:-webkit-autofill:active {
   .rmdp-arrow-container:hover {
     box-shadow: none;
     background: transparent;
-    
+
     .rmdp-arrow {
       border-color: white;
     }

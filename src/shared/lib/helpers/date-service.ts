@@ -1,6 +1,8 @@
 import {DateValueCount} from '@/shared/types'
 import dayjs from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 
+dayjs.extend(weekOfYear)
 
 export class DateService {
 	
@@ -10,20 +12,23 @@ export class DateService {
 		const days = lastDay.diff(start, 'day')
 		const year = firstDay.year()
 		const month = firstDay.month()
+		const startWeek = firstDay.week()
+		const endWeek = lastDay.week()
 		
 		if (days > 750) {
-			return this.more750Days(firstDay, days, year)
+			return this.moreThan750(firstDay, days, year)
 		}
 		if (days > 180) {
-			return this.daysOver180(firstDay, month, days)
+			return this.moreThan180(firstDay, month, days)
 		}
 		if (days > 28) {
-			return this.more28Days(firstDay, days)
-		} else return this.less28days(firstDay, days)
+			return this.moreThan28(firstDay, startWeek, endWeek)
+		}
+		return this.lessThan28(firstDay, days)
 	}
 	
 	
-	private static more750Days(firstDay: dayjs.Dayjs, days: number, year: number) {
+	private static moreThan750(firstDay: dayjs.Dayjs, days: number, year: number) {
 		const result: DateValueCount[] = []
 		for (let i = 0; i < days / 365; i++) {
 			const date = i === 0
@@ -34,7 +39,7 @@ export class DateService {
 		return result
 	}
 	
-	private static daysOver180(firstDay: dayjs.Dayjs, month: number, days: number) {
+	private static moreThan180(firstDay: dayjs.Dayjs, month: number, days: number) {
 		const result: DateValueCount[] = []
 		for (let i = 0; i < days / 30.4; i++) {
 			const date = firstDay.month(month + i).valueOf()
@@ -43,16 +48,16 @@ export class DateService {
 		return result
 	}
 	
-	private static more28Days(firstDay: dayjs.Dayjs, days: number) {
+	private static moreThan28(firstDay: dayjs.Dayjs, startWeek: number, endWeek: number) {
 		const result: DateValueCount[] = []
-		for (let i = 0; i < days / 7; i++) {
-			const date = firstDay.day(i).valueOf()
+		for (let i = startWeek; i < endWeek; i++) {
+			const date = firstDay.week(i).valueOf()
 			result.push({date, value: 0, counter: 0})
 		}
 		return result
 	}
 	
-	private static less28days(firstDay: dayjs.Dayjs, days: number) {
+	private static lessThan28(firstDay: dayjs.Dayjs, days: number) {
 		const result: DateValueCount[] = []
 		for (let i = 0; i < days; i++) {
 			const date = firstDay.day(i).valueOf()

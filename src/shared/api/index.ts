@@ -4,12 +4,14 @@ import {onRequest, onRequestError, onResponse, onResponseError,} from '@/shared/
 export const SERVER_URL: string = import.meta.env.VITE_SERVER_URL
 export const STATIC_URL: string = import.meta.env.VITE_STATIC_URL
 
+export const QueryLimit = 10
+
 const api: AxiosInstance = axios.create({
 	baseURL: `${SERVER_URL}/api/`,
 	headers: {
 		Accept: 'application/json',
 		'Content-Type': 'application/json',
-		authorization: localStorage.getItem('token') || ''
+		authorization: `Bearer ${localStorage.getItem('token') || ''}`
 	}
 })
 

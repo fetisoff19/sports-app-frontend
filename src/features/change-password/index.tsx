@@ -1,8 +1,8 @@
 import {Dispatch, FormEvent, SetStateAction} from 'react'
 
 type Props = {
-	currentPassword: string,
-	setCurrentPassword: Dispatch<SetStateAction<string>>,
+	currentPassword?: string,
+	setCurrentPassword?: Dispatch<SetStateAction<string>>,
 	newPassword: string,
 	setNewPassword: Dispatch<SetStateAction<string>>,
 	repeatNewPassword: string,
@@ -23,11 +23,11 @@ export const ChangePassword = (
 		onClose
 	}: Props) => {
 	const isEqual = newPassword.length > 7 && newPassword === repeatNewPassword
-	const isShort = !!newPassword.length && !!repeatNewPassword.length && !!currentPassword.length
-		&& (newPassword.length < 8 || repeatNewPassword.length < 8 || currentPassword.length < 8)
+	const isShort = !!newPassword.length && !!repeatNewPassword.length && (setCurrentPassword && !!currentPassword?.length)
+		&& (newPassword.length < 8 || repeatNewPassword.length < 8 || (!!setCurrentPassword && currentPassword?.length < 8))
 	const isInputError = !!newPassword.length && !!repeatNewPassword.length && (isShort || !isEqual)
 	
-	async function onSubmit(e: FormEvent) {
+	async function changePassword(e: FormEvent) {
 		e.preventDefault()
 		onChangePassword()
 	}
@@ -35,9 +35,9 @@ export const ChangePassword = (
 	return (
 		<div className="flex flex-col gap-8 w-full px-8">
 			<h3>Enter your current and new password</h3>
-			<input type="password" min="8" placeholder="Current password"
-			       onChange={e => setCurrentPassword(e.target.value)} value={currentPassword}
-			       className={`input input-bordered rounded-2xl w-full ${isShort && 'input-error'}`}/>
+			{setCurrentPassword && <input type="password" min="8" placeholder="Current password"
+                                    onChange={e => setCurrentPassword(e.target.value)} value={currentPassword}
+                                    className={`input input-bordered rounded-2xl w-full ${isShort && 'input-error'}`}/>}
 			<input type="password" min="8" placeholder="New password"
 			       onChange={e => setNewPassword(e.target.value)}
 			       className={`input input-bordered rounded-2xl w-full ${isInputError && 'input-error'}`}
@@ -57,7 +57,8 @@ export const ChangePassword = (
 				<button className="btn btn-neutral w-32" onClick={onClose}>
 					Cancel
 				</button>
-				<button className="btn btn-success w-32" disabled={!isEqual || currentPassword.length < 8} onClick={onSubmit}>
+				<button className="btn btn-success w-32" onClick={changePassword}
+				        disabled={!isEqual || (currentPassword !== undefined && currentPassword.length < 8)}>
 					Success
 				</button>
 			</div>

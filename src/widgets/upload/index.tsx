@@ -8,7 +8,7 @@ import {
 	removeOneFile,
 	setUploading
 } from '@/entities/notify'
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {QUERY_KEY_SOME_WORKOUTS, useWorkoutUpload} from '@/entities/workout'
 import {useQueryClient} from '@tanstack/react-query'
 import {ClearIcon, DoneIcon, ErrorIcon} from '@/shared/svg'
@@ -19,9 +19,10 @@ import {QUERY_KEY_STATS_MAIN} from '@/entities/stats'
 
 export const Upload = () => {
 	const [isDrag, setDrag] = React.useState<boolean>(false)
+	const inputRef = useRef<HTMLInputElement>(null)
+	const isUploading = useStore(notifyStore, state => state.isUploading)
 	const docs = useStore(notifyStore, state => state.files)
 	const disabled = docs.find(({status}) => status !== 'added')
-	const isUploading = useStore(notifyStore, state => state.isUploading)
 	const {refetch} = useAuth()
 	
 	const {mutateAsync} = useWorkoutUpload()
@@ -86,6 +87,9 @@ export const Upload = () => {
 			await queryClient.invalidateQueries({queryKey: [QUERY_KEY_STATS_MAIN], refetchType: 'all'},)
 			await refetch()
 			setUploading(true)
+			if (inputRef.current) {
+				inputRef.current.value = ''
+			}
 		}
 	}
 	
@@ -93,6 +97,9 @@ export const Upload = () => {
 		if (isUploading) {
 			setUploading(false)
 			removeAllFiles()
+			if (inputRef.current) {
+				inputRef.current.value = ''
+			}
 		}
 	}
 	
@@ -113,6 +120,7 @@ export const Upload = () => {
 						type="file" multiple={true} accept={'.fit'}
 						onChange={e => handleInputChange(e)}
 						className="file-input w-full max-w-xs"
+						ref={inputRef}
 					/>
 				</div>
 			</div>
