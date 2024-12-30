@@ -39,7 +39,7 @@ const Stats = () => {
 		               sport={sport}/>
 	
 	if (!isFetching) return (
-		<div className="flex flex-col justify-items-center gap-4 md:gap-8 padding h-full xl:w-[1200px] pb-8 w-96 sm:w-full">
+		<div className="flex flex-col justify-items-center gap-4 md:gap-8 margin h-full xl:w-[1200px] pb-8 w-96 sm:w-full">
 			<StatsToolbar
 				data={mainStats}
 				isTable={isTable} setIsTable={setIsTable}

@@ -8,43 +8,17 @@
 @layer base {
   html {
     font-family: Inter, system-ui, sans-serif;
+
   }
 
-  .scroll::-webkit-scrollbar {
-    width: 10px;
+  :root {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background: #35363A;
+    overflow-x: hidden;
   }
-
-  .scroll::-webkit-scrollbar-track {
-    border-radius: 5px;
-    background: rgba(128, 128, 128, 0.1);
-  }
-
-  .scroll::-webkit-scrollbar-thumb {
-    border-radius: 15px;
-    background: #505159;
-  }
-}
-
-
-:root {
-  width: 100vw;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  /*background: rgba(30, 31, 34, 1);*/
-  /*background: #1c1c1e;*/
-  background: #35363A;
-
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  background: #35363A;
-  /*background: #1d2939;*/
-  /*background: rgba(30, 31, 34, 1);*/
 }
 
 @media (prefers-color-scheme: dark) {
@@ -60,8 +34,8 @@ body {
   }
 }
 
-.padding {
-  padding: 6rem 2rem 2rem 2rem;
+.margin {
+  margin: 6rem 2rem 2rem 2rem;
 }
 
 .no-map {
@@ -88,23 +62,6 @@ body {
 
 .collapse-title, :where(.collapse > input[type="checkbox"]) {
   min-height: 0;
-}
-
-
-::-webkit-scrollbar {
-  width: 0;
-}
-
-::-webkit-scrollbar-track {
-  width: 0;
-}
-
-::-webkit-scrollbar-thumb {
-  width: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  width: 0;
 }
 
 

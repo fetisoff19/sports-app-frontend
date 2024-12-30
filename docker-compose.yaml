@@ -1,0 +1,13 @@
+version: '3.9'
+name: 'sports_app_client'
+
+services:
+  react:
+    container_name: react
+    build:
+      context: .
+      target: production
+    env_file:
+      - .env
+    ports:
+      - "80:80"

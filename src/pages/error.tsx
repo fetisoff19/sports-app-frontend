@@ -10,7 +10,7 @@ export function DefaultCatchBoundary({error}: ErrorComponentProps) {
 	console.error(error)
 	
 	return (
-		<div className="min-w-80 flex-1 p-4 flex flex-col padding items-center justify-center gap-4">
+		<div className="min-w-80 flex-1 p-4 flex flex-col margin items-center justify-center gap-4">
 			<ErrorComponent error={error}/>
 			<div className="flex justify-items-center gap-4">
 				<button onClick={() => router.invalidate()}
