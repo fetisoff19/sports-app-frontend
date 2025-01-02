@@ -10,7 +10,10 @@ services:
     env_file:
       - .env
     volumes:
-      - /etc/letsencrypt
+      - ./nginx:/etc/nginx/nginx.conf # you already linked your config
+      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf # link tls config
+      - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem # link params
+      - /etc/letsencrypt/live/sports-app.online:/etc/letsencrypt/live/sports-app.online # link the cert folder
     ports:
       - "80:80"
       - "443:443"
