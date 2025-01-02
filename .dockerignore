@@ -1,9 +1,7 @@
 node_modules
-
-# Ignore Git repository files
+npm-debug.log
+Dockerfile
+.dockerignore
 .git
-
-# Ignore build folder
-dist
-
-.eslint*
+README.md
+.gitignore

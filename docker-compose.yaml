@@ -9,5 +9,6 @@ services:
       target: production
     env_file:
       - .env
+    restart: unless-stopped
     ports:
       - "80:80"
