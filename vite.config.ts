@@ -12,8 +12,12 @@ export default defineConfig(({mode}) => {
 		],
 		base: './',
 		server: {
-			port: Number(env.VITE_LOCALHOST_PORT),
-			open: !!env.VITE_DEV_OPEN_BROWSER,
+			// host: true,
+			// port: Number(env.VITE_LOCALHOST_PORT),
+			// open: !!env.VITE_DEV_OPEN_BROWSER,
+			hmr: {
+				host: 'localhost',
+			}
 		},
 		preview: {
 			host: true,
