@@ -11,18 +11,18 @@ export default defineConfig(({mode}) => {
 			TanStackRouterVite(),
 		],
 		base: './',
-		server: {
-			// host: true,
-			// port: Number(env.VITE_LOCALHOST_PORT),
-			// open: !!env.VITE_DEV_OPEN_BROWSER,
-			hmr: {
-				host: 'localhost',
-			}
-		},
-		preview: {
-			host: true,
-			port: Number(env.VITE_CLIENT_PORT)
-		},
+		// server: {
+		// host: true,
+		// port: Number(env.VITE_LOCALHOST_PORT),
+		// open: !!env.VITE_DEV_OPEN_BROWSER,
+		// hmr: {
+		// 	host: 'localhost',
+		// }
+		// },
+		// preview: {
+		// 	host: true,
+		// 	port: Number(env.VITE_CLIENT_PORT)
+		// },
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, 'src'),
