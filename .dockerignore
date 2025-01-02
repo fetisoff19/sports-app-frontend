@@ -1,0 +1,9 @@
+node_modules
+
+# Ignore Git repository files
+.git
+
+# Ignore build folder
+dist
+
+.eslint*
