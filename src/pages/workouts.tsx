@@ -38,7 +38,7 @@ const Workouts = () => {
 		: []
 	
 	return (
-		<div className="flex flex-col justify-items-center gap-8 padding xl:w-[1200px] w-96 sm:w-full">
+		<div className="flex flex-col justify-items-center gap-8 margin xl:w-[1200px] w-96 sm:w-full">
 			<WorkoutToolbar sportsList={sportsList}/>
 			{user?.workoutCount === 0 ? <AddFirstWorkout/> :
 				<>
