@@ -9,5 +9,9 @@ services:
       target: production
     env_file:
       - .env
+    volumes:
+      - /etc/letsencrypt/live/sports-app.online/:/etc/letsencrypt/live/sports-app.online/
     ports:
+      - "80:80"
       - "443:443"
+    restart: unless-stopped
