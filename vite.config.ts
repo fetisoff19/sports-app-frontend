@@ -11,9 +11,6 @@ export default defineConfig(({mode}) => {
 			TanStackRouterVite(),
 		],
 		base: './',
-		// build: {
-		// 	assetsDir: './public',
-		// },
 		server: {
 			port: Number(env.VITE_LOCALHOST_PORT),
 			open: !!env.VITE_DEV_OPEN_BROWSER,
