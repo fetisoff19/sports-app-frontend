@@ -1,4 +1,5 @@
 import {Store} from '@tanstack/react-store'
+import uuid4 from 'uuid4'
 
 type Toast = {
 	uuid: string;
@@ -24,15 +25,11 @@ export const notifyStore = new Store<State>({
 	toasts: [],
 	files: [],
 	isUploading: false
-	// files: [{name: '', status: 'added'}, {name: '', status: 'success'}, {name: '', status: 'error'}, {
-	// 	name: '',
-	// 	status: 'success'
-	// }] as Doc[],
 })
 
 export const addNotify = (toast: Omit<Toast, 'uuid'>, ms = 3000) => {
 	notifyStore.setState((state) => {
-		const newToast: Toast = ({...toast, uuid: crypto.randomUUID()})
+		const newToast: Toast = ({...toast, uuid: uuid4()})
 		setTimeout(() => removeNotify(newToast), ms)
 		return {
 			...state,
@@ -74,7 +71,7 @@ export const changeStatus = (doc: UploadDoc, status: Status, error = null) => {
 		return {
 			...state,
 			files: state.files.map(file =>
-				doc.file.name === file.file.name ? ({...file, status, _uuid: crypto.randomUUID(), error}) : file),
+				doc.file.name === file.file.name ? ({...file, status, _uuid: uuid4(), error}) : file),
 		}
 	})
 }

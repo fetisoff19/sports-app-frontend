@@ -21,13 +21,15 @@ export const View = () => {
 	}
 	
 	function openModal() {
-		const dialog = document.getElementById(data?.uuid + 'editNote') as HTMLDialogElement | null
-		if (dialog) {
-			dialog.showModal()
-		}
-		const elem = document.activeElement as HTMLLinkElement
-		if (elem) {
-			elem?.blur()
+		if (!isLoading && data) {
+			const dialog = document.getElementById(data?.uuid + 'editNote') as HTMLDialogElement | null
+			if (dialog) {
+				dialog.showModal()
+			}
+			const elem = document.activeElement as HTMLLinkElement
+			if (elem) {
+				elem?.blur()
+			}
 		}
 	}
 	

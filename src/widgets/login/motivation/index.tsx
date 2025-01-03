@@ -25,16 +25,19 @@ export const Motivation = () => {
 				<h3 className="text-lg pb-1">Core tech stack:</h3>
 				<ul className="list-disc pl-4">
 					<li className="link hover:text-white">
-						<a href="">Client - React with DaisyUI component library, TanStack's
-							products: Query, Router and Store.
-							Charts by
-							Highcharts</a>
+						<a href="https://github.com/fetisoff19/sports-app-frontend">Client - React with DaisyUI component library,
+							TanStack's products: Query, Router and Store.
+						</a>
 					</li>
 					<li className="link hover:text-white">
-						<a href="">Server - Nest, PostgreSQL and parser by Garmin</a>
+						<a href="https://github.com/fetisoff19/sports-app-backend">Server - NestJS, PostgreSQL and parser by
+							Garmin</a>
 					</li>
 					<li className="link hover:text-white">
-						<a href="">Interface design - Figma</a>
+						<a
+							href="https://www.figma.com/design/94hPA28wNLfIk30QAhtfM0/be-active?node-id=0-1&m=dev&t=putY7j2fPXpOhJUF-1">
+							Interface design - Figma
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -42,11 +45,11 @@ export const Motivation = () => {
 				<h3 className="text-lg pb-1">Contacts:</h3>
 				<ul className="list-disc pl-4">
 					<li className="link hover:text-white">
-						<a href="">Telegram</a>
+						<a href="https://www.linkedin.com/in/oleg-fetisov-733900275">LinkedIn</a>
 					</li>
-					<li className="link hover:text-white">
-						<a href="">Gmail</a>
-					</li>
+					{/*<li className="link hover:text-white">*/}
+					{/*	<a href="">Gmail</a>*/}
+					{/*</li>*/}
 				</ul>
 			</div>
 		

@@ -56,7 +56,7 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 					className="menu menu-sm dropdown-content bg-base-100 rounded-box shadow-xl
 			mt-3 z-[1] p-3 w-52 left-[-144px] top-[56px]"
 				>
-					{withEditNotes && <li onClick={() => handleDropdownClick('editNote')}>
+					{withEditNotes && <li onClick={() => handleDropdownClick(data.uuid + 'editNote')}>
             <a className="p-3 rounded-xl hover:text-white">{data.note?.length ? 'Edit Notes' : 'Add Notes'}</a>
           </li>}
 					<li onClick={() => handleDropdownClick(data.uuid + 'rename')}>
@@ -67,20 +67,28 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 					</li>
 				</ul>
 			</div>
-			<Modal id={data.uuid + 'rename'} text={`Enter a new name`} handleConfirm={handleRenameClick}
-			       dropDownClose={handleDropdownClick}>
+			<Modal
+				id={data.uuid + 'rename'}
+				text={`Enter a new name`}
+				handleConfirm={handleRenameClick}
+				dropDownClose={handleDropdownClick}
+			>
 				<input
 					type="text"
 					placeholder="Type here"
 					className="textarea textarea-bordered invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+          focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
 					value={name}
 					onChange={e => setName(e.target.value)}
 					required
 				/>
 			</Modal>
-			<Modal id={data.uuid + 'editNote'} text={'Enter notes'}
-			       handleConfirm={handleRenameClick} dropDownClose={handleDropdownClick}>
+			<Modal
+				id={data.uuid + 'editNote'}
+				text={'Enter notes'}
+				handleConfirm={handleRenameClick}
+				dropDownClose={handleDropdownClick}
+			>
 				<textarea
 					className="textarea textarea-bordered h-36" placeholder="Type here" value={note || ''}
 					onChange={e => setNote(e.target.value)}
