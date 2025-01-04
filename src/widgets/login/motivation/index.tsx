@@ -13,7 +13,7 @@ export const Motivation = () => {
 			</div>
 			<div>
 				<h1 className="text-2xl pb-1">About</h1>
-				The application was created for educational purposes. View your
+				The application was created for educational and non-commercial purposes. View your
 				activities by uploading your tracks in the .fit extension or{' '}
 				<a className="link hover:text-white" href={link}>download my files</a>. Stable support for the following
 				sports: cycling, running, hiking.

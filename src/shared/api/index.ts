@@ -2,6 +2,7 @@ import axios, {AxiosInstance} from 'axios'
 import {onRequest, onRequestError, onResponse, onResponseError,} from '@/shared/api/helpers'
 
 export const SERVER_URL: string = import.meta.env.VITE_SERVER_URL
+export const STATIC_URL: string = import.meta.env.VITE_STATIC_URL
 
 export const QueryLimit = 10
 
