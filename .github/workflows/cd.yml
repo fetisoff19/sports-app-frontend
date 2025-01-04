@@ -2,13 +2,18 @@ name: cd
 
 on:
   push:
-    branches: [ main, ci/cd ]
+    branches:
+      - main
+      - ci/cd
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
