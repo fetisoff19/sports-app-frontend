@@ -1,14 +1,17 @@
 name: cd
 on:
-  push:
-    branches: [ main ]
+  workflow_run:
+    branches:
+      - main
+    workflows: [ ci ]
+    types: [ completed ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
-
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
