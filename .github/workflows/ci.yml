@@ -11,11 +11,6 @@ jobs:
         name: Install pnpm
         with:
           version: 9
-      #      - name: install node
-      #        uses: actions/setup-node@v4
-      #        with:
-      #          node-version: 22
-      #          cache: 'pnpm'
       - name: install dependencies
         run: pnpm install
 
