@@ -1,7 +1,7 @@
-export * from './date-service.ts'
+export * from './date-service'
 export * from './first-capital-letter.ts'
 export * from './open-modal.ts'
-export * from './unit-converter.ts'
+export * from './unit-converter'
 
 
 

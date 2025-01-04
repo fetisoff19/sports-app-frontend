@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "route generation": "tsr generate"
+    "route generation": "tsr generate",
+    "test": "vitest"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -49,6 +50,7 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
     "uuid4": "2.0.3",
-    "vite": "5.4.6"
+    "vite": "5.4.6",
+    "vitest": "^2.1.8"
   }
 }

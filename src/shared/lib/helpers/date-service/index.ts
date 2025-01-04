@@ -29,11 +29,20 @@ export class DateService {
 	
 	
 	private static moreThan750(firstDay: dayjs.Dayjs, days: number, year: number) {
+		const millisecond = dayjs(firstDay).millisecond()
+		const second = dayjs(firstDay).second()
+		const minute = dayjs(firstDay).minute()
+		const hour = dayjs(firstDay).hour()
 		const result: DateValueCount[] = []
 		for (let i = 0; i < days / 365; i++) {
 			const date = i === 0
 				? firstDay
-				: dayjs().year(year + i)
+				: dayjs()
+					.year(year + i)
+					.hour(hour)
+					.minute(minute)
+					.second(second)
+					.millisecond(millisecond)
 			result.push({date: date.valueOf(), value: 0, counter: 0})
 		}
 		return result
@@ -59,8 +68,8 @@ export class DateService {
 	
 	private static lessThan28(firstDay: dayjs.Dayjs, days: number) {
 		const result: DateValueCount[] = []
-		for (let i = 0; i < days; i++) {
-			const date = firstDay.day(i).valueOf()
+		for (let i = 0; i <= days; i++) {
+			const date = firstDay.date(firstDay.date() + i).valueOf()
 			result.push({date, value: 0, counter: 0})
 		}
 		return result

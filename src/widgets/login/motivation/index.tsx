@@ -47,9 +47,6 @@ export const Motivation = () => {
 					<li className="link hover:text-white">
 						<a href="https://www.linkedin.com/in/oleg-fetisov-733900275">LinkedIn</a>
 					</li>
-					{/*<li className="link hover:text-white">*/}
-					{/*	<a href="">Gmail</a>*/}
-					{/*</li>*/}
 				</ul>
 			</div>
 		
