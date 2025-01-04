@@ -1,12 +1,18 @@
 name: cd
 on:
-  push:
-    branches:
-      - main
-      - ci/cd
+  #  push:
+  #    branches:
+  #      - main
+  #      - ci/cd
+  workflow_run:
+    workflows: [ "ci" ]
+    branches: [ main, ci/cd ]
+    types:
+      - completed
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: checkout
