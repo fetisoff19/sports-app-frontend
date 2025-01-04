@@ -7,8 +7,7 @@ on:
   workflow_run:
     workflows: [ ci ]
     branches: [ main, ci/cd ]
-    types:
-      - completed
+    types: [ completed ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
