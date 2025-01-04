@@ -5,7 +5,7 @@ on:
   #      - main
   #      - ci/cd
   workflow_run:
-    workflows: [ "ci" ]
+    workflows: [ ci ]
     branches: [ main, ci/cd ]
     types:
       - completed
