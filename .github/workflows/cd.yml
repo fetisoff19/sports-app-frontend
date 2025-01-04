@@ -1,10 +1,10 @@
 name: cd
-
 on:
   push:
     branches:
       - main
       - ci/cd
+
 
 jobs:
   deploy:
