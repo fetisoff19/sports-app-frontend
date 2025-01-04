@@ -1,5 +1,5 @@
 import {useAuth, useChangePassword, useLogin} from '@/entities/auth/api/queries'
-import {Dispatch, FormEvent, SetStateAction, useEffect, useState} from 'react'
+import {Dispatch, FormEvent, SetStateAction, useEffect, useRef, useState} from 'react'
 import {EmailIcon, GithubIcon, GoogleIcon, PasswordIcon} from '@/shared/svg'
 import {useSearch} from '@tanstack/react-router'
 import {SERVER_URL} from '@/shared/api'
@@ -24,7 +24,7 @@ export const Auth = ({setRegister}: Props) => {
 	const {mutate: login} = useLogin()
 	const {mutate: recoveryMutate} = useAuthPasswordRecovery()
 	const {mutateAsync: changePassword} = useChangePassword()
-	
+	const ref = useRef<HTMLInputElement>(null)
 	const {refetch} = useAuth()
 	
 	const {token} = useSearch({strict: false})
@@ -63,7 +63,9 @@ export const Auth = ({setRegister}: Props) => {
 	}
 	
 	function recoveryPassword() {
-		recoveryMutate({email})
+		if (ref?.current?.checkValidity()) {
+			recoveryMutate({email})
+		}
 	}
 	
 	async function onChangePassword() {
@@ -92,12 +94,25 @@ export const Auth = ({setRegister}: Props) => {
 	
 	return (
 		<>
-			<Modal id={dialogSetEmailId} text={'Enter your email, witch you used when registration'}
-			       handleConfirm={recoveryPassword}>
+			<Modal
+				id={dialogSetEmailId}
+				text={'Enter your email, witch you used when registration'}
+				handleConfirm={recoveryPassword}
+			>
 				<label className="input flex items-center gap-2 border-none">
 					<EmailIcon/>
-					<input type="email" className="min-w-24 text-sm" placeholder="Email" value={email} required={true}
-					       onChange={(e) => setEmail(e.target.value)}/>
+					<input
+						ref={ref}
+						type="email"
+						placeholder="Email"
+						value={email}
+						required={true}
+						name="email"
+						autoComplete="on"
+						pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
+						className="min-w-24 text-sm"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
 				</label>
 			</Modal>
 			<Modal id={dialogSetPasswordId} showCloseBtn={false}>
@@ -111,15 +126,30 @@ export const Auth = ({setRegister}: Props) => {
 					<div className="flex flex-col gap-4">
 						<label className="input flex items-center gap-2 border-none">
 							<EmailIcon/>
-							<input type="email" className="min-w-24 text-sm" placeholder="Email" value={email}
-							       pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
-							       onChange={(e) => setEmail(e.target.value)}/>
+							<input
+								type="email"
+								name="email"
+								autoComplete="on"
+								className="min-w-24 text-sm"
+								placeholder="Email"
+								value={email}
+								required={true}
+								pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 						</label>
 						<label className="input flex items-center gap-2 border-none">
 							<PasswordIcon/>
-							<input type="password" className="min-w-24 text-sm" value={password} minLength={8}
-							       required={true}
-							       onChange={(e) => setPassword(e.target.value)}/>
+							<input
+								type="password"
+								name="password"
+								autoComplete="on"
+								className="min-w-24 text-sm"
+								value={password}
+								minLength={8}
+								required={true}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
 						</label>
 					</div>
 					<div className="link disabled hover:text-white" onClick={() => openModal(dialogSetEmailId)}>
@@ -129,8 +159,8 @@ export const Auth = ({setRegister}: Props) => {
 				</form>
 				<div className="">
 					Don’t have an account?{' '}
-					<a className="link hover:text-white " onClick={() => setRegister(() => true)}
-					>Sign Up!
+					<a className="link hover:text-white " onClick={() => setRegister(() => true)}>
+						Sign Up!
 					</a>
 				</div>
 				<div className="flex flex-col gap-2">

@@ -35,18 +35,38 @@ export const ChangePassword = (
 	return (
 		<div className="flex flex-col gap-8 w-full px-8">
 			<h3>Enter your current and new password</h3>
-			{setCurrentPassword && <input type="password" min="8" placeholder="Current password"
-                                    onChange={e => setCurrentPassword(e.target.value)} value={currentPassword}
-                                    className={`input input-bordered rounded-2xl w-full ${isShort && 'input-error'}`}/>}
-			<input type="password" min="8" placeholder="New password"
-			       onChange={e => setNewPassword(e.target.value)}
-			       className={`input input-bordered rounded-2xl w-full ${isInputError && 'input-error'}`}
-			       value={newPassword}/>
+			{setCurrentPassword &&
+        <input
+          type="password"
+          name="password1"
+          autoComplete="on"
+          min="8"
+          placeholder="Current password"
+          onChange={e => setCurrentPassword(e.target.value)} value={currentPassword}
+          className={`input input-bordered rounded-2xl w-full ${isShort && 'input-error'}`}
+        />
+			}
+			<input
+				type="password"
+				name="password2"
+				autoComplete="false"
+				min="8"
+				placeholder="New password"
+				onChange={e => setNewPassword(e.target.value)}
+				className={`input input-bordered rounded-2xl w-full ${isInputError && 'input-error'}`}
+				value={newPassword}
+			/>
 			<label className="w-full">
-				<input type="password" min="8" placeholder="Repeat new password"
-				       onChange={e => setRepeatNewPassword(e.target.value)}
-				       className={`input input-bordered rounded-2xl w-full ${isInputError && 'input-error'}`}
-				       value={repeatNewPassword}/>
+				<input
+					type="password"
+					name="password3"
+					autoComplete="false"
+					min="8"
+					placeholder="Repeat new password"
+					onChange={e => setRepeatNewPassword(e.target.value)}
+					className={`input input-bordered rounded-2xl w-full ${isInputError && 'input-error'}`}
+					value={repeatNewPassword}
+				/>
 				<div className="label h-4 py-6">
 							<span className="label-text text-red-300">
 								{isInputError && (isShort ? 'Use at least 8 characters' : !isEqual ? `Passwords aren't equal` : '')}
@@ -57,8 +77,11 @@ export const ChangePassword = (
 				<button className="btn btn-neutral w-32" onClick={onClose}>
 					Cancel
 				</button>
-				<button className="btn btn-success w-32" onClick={changePassword}
-				        disabled={!isEqual || (currentPassword !== undefined && currentPassword.length < 8)}>
+				<button
+					className="btn btn-success w-32"
+					onClick={changePassword}
+					disabled={!isEqual || (currentPassword !== undefined && currentPassword.length < 8)}
+				>
 					Success
 				</button>
 			</div>

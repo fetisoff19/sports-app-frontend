@@ -5,7 +5,7 @@ import {IconGenerator, Modal} from '@/shared/ui'
 import {prepareValues} from '@/shared/lib/helpers'
 import {Link} from '@tanstack/react-router'
 import {useState} from 'react'
-import {SERVER_URL} from '@/shared/api'
+import {STATIC_URL} from '@/shared/api'
 
 type Props = {
 	data: WorkoutItem,
@@ -19,8 +19,7 @@ export const Card = ({data, isLoading}: Props) => {
 	const [imgIsError, setImgError] = useState<boolean>(false)
 	
 	const {mutate: rename} = useWorkoutRename()
-	const src = `${SERVER_URL}/${data.map}`
-	
+	const src = `${STATIC_URL}/${data.map}`
 	const indicators: Indicator[] | undefined = orderItemValues.map((item) => {
 		const value = Number(data?.[item as keyof WorkoutItem] || 0)
 		return ({
