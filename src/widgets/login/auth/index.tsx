@@ -159,9 +159,9 @@ export const Auth = ({setRegister}: Props) => {
 				</form>
 				<div className="">
 					Don’t have an account?{' '}
-					<a className="link hover:text-white " onClick={() => setRegister(() => true)}>
+					<span className="link hover:text-white " onClick={() => setRegister(() => true)}>
 						Sign Up!
-					</a>
+					</span>
 				</div>
 				<div className="flex flex-col gap-2">
 					<button className="btn btn-outline outline-8 btn-wide rounded-2xl hover:text-white" onClick={authWithGoogle}>

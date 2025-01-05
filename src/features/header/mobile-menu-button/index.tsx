@@ -24,4 +24,7 @@ export const MobileMenuIcon = () => {
 			</div>
 		</>
 	)
+	return (
+		<div className="w-14 lg:hidden pr-2"/>
+	)
 }

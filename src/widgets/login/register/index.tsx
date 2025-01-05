@@ -48,9 +48,9 @@ export const Register = ({setRegister}: Props) => {
 			</form>
 			<div className="">
 				Do you have an account?{' '}
-				<a className="link hover:text-white " onClick={() => setRegister(() => false)}
-				>Log In!
-				</a>
+				<span className="link hover:text-white " onClick={() => setRegister(() => false)}>
+					Log In!
+				</span>
 			</div>
 		</div>
 	)

@@ -51,9 +51,9 @@ export const MobileMenu = () => {
 					</Link>
 				</li>
 				<li onClick={handleDrawerClick} className="sm:hidden">
-					<a className="p-3" onClick={() => openModal(UPLOAD)}>
+					<span className="p-3" onClick={() => openModal(UPLOAD)}>
 						Add Workout
-					</a>
+					</span>
 				</li>
 				<li>
 					<div className="divider pointer-events-none h-1"></div>
@@ -74,9 +74,9 @@ export const MobileMenu = () => {
 					</Link>
 				</li>
 				<li onClick={handleLogoutClock} className="pl-14">
-					<a className="p-3">
+					<span className="p-3">
 						Logout
-					</a>
+					</span>
 				</li>
 			</ul>
 		</div>
