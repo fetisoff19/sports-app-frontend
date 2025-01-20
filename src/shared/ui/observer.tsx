@@ -7,7 +7,7 @@ type Props = {
 export const Observer = ({reference}: Props) => {
 	return (
 		<div ref={reference}>
-			<div className="h-1"/>
+			<div className="h-1 w-1"/>
 		</div>
 	)
 }

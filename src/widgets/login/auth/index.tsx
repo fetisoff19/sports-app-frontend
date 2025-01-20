@@ -116,10 +116,14 @@ export const Auth = ({setRegister}: Props) => {
 				</label>
 			</Modal>
 			<Modal id={dialogSetPasswordId} showCloseBtn={false}>
-				<ChangePassword onClose={closeModal}
-				                onChangePassword={onChangePassword}
-				                newPassword={newPassword} setNewPassword={setNewPassword}
-				                repeatNewPassword={repeatNewPassword} setRepeatNewPassword={setRepeatNewPassword}/>
+				<ChangePassword
+					onClose={closeModal}
+					onChangePassword={onChangePassword}
+					newPassword={newPassword}
+					setNewPassword={setNewPassword}
+					repeatNewPassword={repeatNewPassword}
+					setRepeatNewPassword={setRepeatNewPassword}
+				/>
 			</Modal>
 			<div className="flex flex-col items-center w-full h-fit text-sm gap-8">
 				<form onSubmit={onSubmit} className="flex flex-col items-center w-full h-fit gap-8">
@@ -174,10 +178,6 @@ export const Auth = ({setRegister}: Props) => {
 						Continue with Github
 					</button>
 				</div>
-				<div className="text-gray-600">
-					Would you like to inspect app?
-				</div>
-				<button className="btn btn-success btn-wide rounded-2xl btn-disabled">View App</button>
 			</div>
 		</>
 	)

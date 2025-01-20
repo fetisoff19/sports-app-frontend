@@ -9,6 +9,7 @@ import {ListItem} from '@/widgets/list-item'
 import {AddFirstWorkout} from '@/features/add-first-workout'
 import {useStatsGetMain} from '@/entities/stats'
 import {QueryLimit} from '@/shared/api'
+import {Layout} from '@/widgets/layout'
 
 
 const Workouts = () => {
@@ -37,21 +38,22 @@ const Workouts = () => {
 		? Array(workoutCount >= QueryLimit ? QueryLimit : workoutCount).fill('')
 		: []
 	
+	if (!user) return
+	if (user?.workoutCount === 0) return (
+		<AddFirstWorkout/>
+	)
+	
 	return (
-		<div className="flex flex-col justify-items-center gap-8 margin xl:w-[1200px] w-96 sm:w-full">
+		<Layout className="w-80 sm:w-full">
 			<WorkoutToolbar sportsList={sportsList}/>
-			{user?.workoutCount === 0 ? <AddFirstWorkout/> :
-				<>
-					<div className="flex flex-col items-center gap-8">
-						{flatData.map(item =>
-							<ListItem key={item.uuid} data={item} isLoading={false}/>)}
-						{isShowingLoader && mockData.map((_, index) =>
-							<ListItem key={index} data={mockWorkout} isLoading={isShowingLoader}/>)}
-					</div>
-					<Observer reference={observerElem}/>
-				</>
-			}
-		</div>
+			<div className="flex flex-col items-center gap-8">
+				{flatData.map(item => <ListItem key={item.uuid} data={item} isLoading={false}/>)}
+				{isShowingLoader && mockData.map((_, index) =>
+					<ListItem key={index} data={mockWorkout} isLoading={isShowingLoader}/>)
+				}
+			</div>
+			<Observer reference={observerElem}/>
+		</Layout>
 	)
 }
 

@@ -33,15 +33,26 @@ export const Register = ({setRegister}: Props) => {
 				<div className="flex flex-col gap-4">
 					<label className="input flex items-center gap-2 border-none">
 						<EmailIcon/>
-						<input type="email" className="min-w-24 text-sm" placeholder="Email" value={email} required
-						       pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
-						       onChange={(e) => setEmail(e.target.value)}/>
+						<input
+							type="email"
+							className="min-w-24 text-sm"
+							placeholder="Email"
+							value={email}
+							required
+							pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 					</label>
 					<label className="input flex items-center gap-2 border-none">
 						<PasswordIcon/>
-						<input type="password" className="min-w-24 text-sm" value={password} minLength={8}
-						       required={true}
-						       onChange={(e) => setPassword(e.target.value)}/>
+						<input
+							type="password"
+							className="min-w-24 text-sm"
+							value={password}
+							minLength={8}
+							required={true}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
 					</label>
 				</div>
 				<button className="btn btn-success btn-wide rounded-2xl" type="submit">Sign Up!</button>

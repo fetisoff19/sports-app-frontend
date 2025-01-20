@@ -45,7 +45,7 @@ export const WorkoutToolbar = ({sportsList}: Props) => {
 		setDirection()
 	}
 	
-	const filteredParamFields = () => {
+	function filteredParamFields() {
 		if (sport === 'all') {
 			return sortParams.filter((item) => !item.includes('power') && !item.includes('speed'))
 		}

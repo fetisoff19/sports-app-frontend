@@ -11,7 +11,7 @@ const api: AxiosInstance = axios.create({
 	headers: {
 		Accept: 'application/json',
 		'Content-Type': 'application/json',
-		authorization: `Bearer ${localStorage.getItem('token') || ''}`
+		authorization: `Bearer ${localStorage.getItem('token') ?? ''}`
 	}
 })
 

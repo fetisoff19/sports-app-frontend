@@ -192,8 +192,13 @@ export const Charts = ({data, setIndex}: Props) => {
 				className="flex flex-col gap-8 pb-20 sm:pb-12 xl:pb-0 sticky top-16 sm:static bg-base-100 z-10 bg-opacity-80">
 				<div className="flex flex-row justify-between h-12 w-full">
 					<div className="xl:flex xl:flex-row grid sm:grid-cols-4 grid-cols-3 sm:gap-2 flex-1 p-2">
-						<LiveStats points={data?.chartData?.points} type={type} value={value}
-						           coef={data.session.cadence_coef} chartNames={chartNames}/>
+						<LiveStats
+							points={data?.chartData?.points}
+							type={type}
+							value={value}
+							coef={data.session.cadence_coef}
+							chartNames={chartNames}
+						/>
 					</div>
 					{!!data?.chartData?.points?.at(-1)?.d && <label className="swap btn btn-ghost btn-circle group">
             <input type="checkbox" onChange={changeType}/>
@@ -205,10 +210,14 @@ export const Charts = ({data, setIndex}: Props) => {
 				{options && <HighchartsReact highcharts={Highcharts} allowChartUpdate={isNewType} options={options}/>}
 			</div>
 			{!!data?.powerCurve?.length &&
-        <HighchartsReact highcharts={Highcharts} allowChartUpdate={false} options={{
-					...powerCurveOption,
-					series: [{data: data.powerCurve, type: 'areaspline', color: '#ffffff', name: 'pc'}],
-				}}/>}
+        <HighchartsReact
+          highcharts={Highcharts}
+          allowChartUpdate={false}
+          options={{
+						...powerCurveOption,
+						series: [{data: data.powerCurve, type: 'areaspline', color: '#ffffff', name: 'pc'}],
+					}}
+        />}
 		</div>
 	)
 }

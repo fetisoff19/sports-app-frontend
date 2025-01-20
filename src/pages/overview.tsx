@@ -8,6 +8,7 @@ import {Observer} from '@/shared/ui'
 import {Card} from '@/widgets/overview-card'
 import {AddFirstWorkout} from '@/features/add-first-workout'
 import {QueryLimit} from '@/shared/api'
+import {Layout} from '@/widgets/layout'
 
 
 const Overview = () => {
@@ -30,20 +31,21 @@ const Overview = () => {
 	const observerElem = useRef(null)
 	useObserver(observerElem, fetchNextPage, hasNextPage)
 	
+	
+	if (!user) return
+	if (user?.workoutCount === 0) return (
+		<AddFirstWorkout/>
+	)
 	return (
-		<div className="flex flex-col justify-items-center gap-8 margin xl:w-[1200px]">
+		<Layout>
 			<OverviewToolbar/>
-			{user?.workoutCount === 0 ? <AddFirstWorkout/> :
-				<>
-					<div className="xl:grid xl:grid-cols-2 flex flex-col items-center gap-8">
-						{flatData.map(item => <Card key={item.uuid} data={item} isLoading={false}/>)}
-						{isShowingLoader && mockData.map((_, index) =>
-							<Card key={index} data={mockWorkout} isLoading={isShowingLoader}/>)}
-					</div>
-					<Observer reference={observerElem}/>
-				</>
-			}
-		</div>
+			<div className="xl:grid xl:grid-cols-2 flex flex-col items-center gap-8">
+				{flatData.map(item => <Card key={item.uuid} data={item} isLoading={false}/>)}
+				{isShowingLoader && mockData.map((_, index) =>
+					<Card key={index} data={mockWorkout} isLoading={isShowingLoader}/>)}
+			</div>
+			<Observer reference={observerElem}/>
+		</Layout>
 	)
 }
 

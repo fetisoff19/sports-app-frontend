@@ -1,9 +1,9 @@
 import {Dispatch, SetStateAction} from 'react'
 
 type DropdownProps = {
-	value: string;
-	setValue: Dispatch<SetStateAction<string>> | ((param: string) => void);
-	valueList: string[],
+	value: string
+	setValue: Dispatch<SetStateAction<string>> | ((param: string) => void)
+	valueList: string[]
 	fields?: Record<string, string>
 	btnSuccess?: boolean
 	style?: string
@@ -31,7 +31,7 @@ export const Dropdown = ({value, setValue, valueList, fields, btnSuccess, style}
 				tabIndex={0}
 				className="menu dropdown-content bg-base-100 rounded-box shadow-xl mt-3 z-[1] w-full">
 				{valueList
-					.map(item =>
+					.map(item => (
 						<li key={item} onClick={() => handleDropdownClick(item)}>
 							<button className={
 								`inline-block btn btn-ghost rounded-xl text-left hover:text-white ${value === item && 'text-white' +
@@ -39,7 +39,9 @@ export const Dropdown = ({value, setValue, valueList, fields, btnSuccess, style}
 							}>
 								{fields?.[item] || item}
 							</button>
-						</li>)}
+						</li>)
+					)
+				}
 			</ul>
 		</div>
 	)

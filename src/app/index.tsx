@@ -32,7 +32,7 @@ export const App = () => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<RouterProvider router={router}/>
-			<ReactQueryDevtools initialIsOpen={false} buttonPosition={'bottom-right'}/>
+			<ReactQueryDevtools initialIsOpen={false} buttonPosition={'bottom-left'}/>
 		</QueryClientProvider>
 	)
 }

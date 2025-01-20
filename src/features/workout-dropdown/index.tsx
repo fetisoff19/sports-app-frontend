@@ -20,12 +20,10 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 	
 	const location = useLocation()
 	
-	
 	function handleRenameClick() {
 		rename({uuid: data.uuid, name, note})
 		handleDropdownClick()
 	}
-	
 	
 	function handleDeleteClick() {
 		remove({uuid: data.uuid})
@@ -35,8 +33,7 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 		handleDropdownClick()
 	}
 	
-	
-	const handleDropdownClick = (type?: string) => {
+	function handleDropdownClick(type?: string) {
 		type && openModal(type)
 		const elem = document.activeElement as HTMLLinkElement
 		if (elem) {
@@ -96,8 +93,8 @@ export const WorkoutDropdown = ({data, withEditNotes = false}: Props) => {
 			</Modal>
 			<Modal
 				id={data.uuid + 'delete'} text={`Do you want to delete workout "${data.name}?"`}
-				handleConfirm={handleDeleteClick} dropDownClose={handleDropdownClick}/>
+				handleConfirm={handleDeleteClick} dropDownClose={handleDropdownClick}
+			/>
 		</>
-	
 	)
 }

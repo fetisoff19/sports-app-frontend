@@ -68,7 +68,7 @@ export class DateService {
 	
 	private static lessThan28(firstDay: dayjs.Dayjs, days: number) {
 		const result: DateValueCount[] = []
-		for (let i = 0; i <= days; i++) {
+		for (let i = 0; i < days; i++) {
 			const date = firstDay.date(firstDay.date() + i).valueOf()
 			result.push({date, value: 0, counter: 0})
 		}

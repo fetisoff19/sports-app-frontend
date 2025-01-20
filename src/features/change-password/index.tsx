@@ -11,8 +11,8 @@ type Props = {
 	onClose: () => void
 }
 
-export const ChangePassword = (
-	{
+export const ChangePassword = (props: Props) => {
+	const {
 		currentPassword,
 		setCurrentPassword,
 		newPassword,
@@ -21,7 +21,7 @@ export const ChangePassword = (
 		setRepeatNewPassword,
 		onChangePassword,
 		onClose
-	}: Props) => {
+	} = props
 	const isEqual = newPassword.length > 7 && newPassword === repeatNewPassword
 	const isShort = !!newPassword.length && !!repeatNewPassword.length && (setCurrentPassword && !!currentPassword?.length)
 		&& (newPassword.length < 8 || repeatNewPassword.length < 8 || (!!setCurrentPassword && currentPassword?.length < 8))
@@ -68,9 +68,9 @@ export const ChangePassword = (
 					value={repeatNewPassword}
 				/>
 				<div className="label h-4 py-6">
-							<span className="label-text text-red-300">
-								{isInputError && (isShort ? 'Use at least 8 characters' : !isEqual ? `Passwords aren't equal` : '')}
-							</span>
+					<span className="label-text text-red-300">
+						{isInputError && (isShort ? 'Use at least 8 characters' : !isEqual ? `Passwords aren't equal` : '')}
+					</span>
 				</div>
 			</label>
 			<div className="flex flex-row gap-4 justify-end">

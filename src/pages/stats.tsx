@@ -11,6 +11,7 @@ import {
 } from '@/entities/stats'
 import {sports} from '@/shared/lib'
 import {DateObject} from 'react-multi-date-picker'
+import {Layout} from '@/widgets/layout'
 
 
 const Stats = () => {
@@ -35,19 +36,24 @@ const Stats = () => {
 	
 	const content = isTable
 		? <StatsTable data={tableData} isLoading={isTableLoading}/>
-		: <StatsCharts data={chartData} param={param} setParam={setParam} powerCurve={powerCurve}
-		               sport={sport}/>
+		: <StatsCharts data={chartData} param={param} setParam={setParam} powerCurve={powerCurve} sport={sport}/>
+	
+	if (!mainStats) return
 	
 	if (!isFetching) return (
-		<div className="flex flex-col justify-items-center gap-4 md:gap-8 margin h-full xl:w-[1200px] pb-8 w-96 sm:w-full">
-			<StatsToolbar
-				data={mainStats}
-				isTable={isTable} setIsTable={setIsTable}
-				sport={sport} setSport={setSport}
-				dates={dates} setDates={setDates}
-			/>
-			{mainStats?.length !== 0 ? content : <AddFirstWorkout/>}
-		</div>
+		<>
+			{mainStats.length === 0 ? <AddFirstWorkout/> :
+				<Layout className="w-80 sm:w-full">
+					<StatsToolbar
+						data={mainStats}
+						isTable={isTable} setIsTable={setIsTable}
+						sport={sport} setSport={setSport}
+						dates={dates} setDates={setDates}
+					/>
+					{content}
+				</Layout>
+			}
+		</>
 	)
 }
 

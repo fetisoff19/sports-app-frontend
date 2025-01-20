@@ -25,4 +25,5 @@ export const useObserver = (
 			return () => observer.unobserve(element)
 		}
 	}, [fetchNextPage, hasNextPage, handleObserver, observerElem])
+	
 }

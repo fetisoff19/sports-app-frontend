@@ -11,7 +11,7 @@ export const ViewFullStats = ({session}: Props) => {
 		? ['enhanced_speed', 'hr', 'cadence', 'elevation', 'time', 'other', 'temperature',]
 		: ['power', 'speed', 'hr', 'cadence', 'elevation', 'time', 'other', 'temperature']
 	
-	const Columns = orderValues.map((item, index) => {
+	const columns = orderValues.map((item, index) => {
 		const orderFields = fullStatsFields.find((f) => f.label === item)
 		const indicators: Indicator[] | undefined = orderFields?.fields.map((item: string) => {
 			const value = session?.[item as string | number as keyof Session]
@@ -43,7 +43,7 @@ export const ViewFullStats = ({session}: Props) => {
 	return (
 		<div className="flex items-center w-full">
 			<div className="grid grid-cols-3 md:grid-cols-4 gap-2 justify-between w-full">
-				{Columns}
+				{columns}
 			</div>
 		</div>
 	)

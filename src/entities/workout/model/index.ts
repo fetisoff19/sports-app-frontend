@@ -5,7 +5,6 @@ export * from './types'
 
 export const QUERY_KEY_SOME_WORKOUTS = 'SOME_WORKOUTS'
 export const QUERY_KEY_ONE_WORKOUT = 'ONE_WORKOUT'
-export const QUERY_KEY_MAP_IMAGE = 'MAP_IMAGE'
 export const UPLOAD = 'UPLOAD'
 
 type State = {

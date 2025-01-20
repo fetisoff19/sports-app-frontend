@@ -65,7 +65,6 @@ export const ListItem = ({data, isLoading}: Props) => {
 				{Stats}
 			</div>
 			{!isLoading ? <WorkoutDropdown data={data}/> : <div className="w-12"/>}
-		
 		</div>
 	)
 }

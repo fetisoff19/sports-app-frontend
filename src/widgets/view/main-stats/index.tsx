@@ -18,7 +18,7 @@ export const ViewMainStats = ({session}: Props) => {
 			})
 		})
 	
-	const Stats = indicators?.map((item, index) =>
+	const stats = indicators?.map((item, index) =>
 		<div key={index} className="flex flex-col justify-between gap-2">
 			<div className="text-xs stat-title justify-start">{item?.field}</div>
 			<div className="text-lg stat-value justify-start">{item?.value}</div>
@@ -28,7 +28,7 @@ export const ViewMainStats = ({session}: Props) => {
 	return (
 		<div className="flex flex-1 items-center w-full">
 			<div className="grid grid-cols-2 sm:grid-cols-3 gap-3 justify-between w-full">
-				{Stats}
+				{stats}
 			</div>
 		</div>
 	)

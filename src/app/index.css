@@ -1,23 +1,21 @@
 @import 'react-calendar/dist/Calendar.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: Inter, system-ui, sans-serif;
-
-  }
-
-  :root {
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
+  html, body {
     margin: 0;
-    background: #35363A;
-    overflow-x: hidden;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: Inter, system-ui, sans-serif;
+    background-color: #35363A;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 }
 
@@ -32,10 +30,6 @@
   html {
     color-scheme: dark;
   }
-}
-
-.margin {
-  margin: 6rem 2rem 2rem 2rem;
 }
 
 .no-map {

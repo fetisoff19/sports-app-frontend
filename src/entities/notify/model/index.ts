@@ -2,9 +2,9 @@ import {Store} from '@tanstack/react-store'
 import uuid4 from 'uuid4'
 
 type Toast = {
-	uuid: string;
-	type: 'info' | 'success' | 'error';
-	message: string;
+	uuid: string
+	type: 'info' | 'success' | 'error'
+	message: string
 }
 
 type Status = 'added' | 'success' | 'error'
@@ -27,8 +27,11 @@ export const notifyStore = new Store<State>({
 	isUploading: false
 })
 
-export const addNotify = (toast: Omit<Toast, 'uuid'>, ms = 3000) => {
+export const addNotify = (toast: Omit<Toast, 'uuid' | 'ts'>, ms = 3000) => {
 	notifyStore.setState((state) => {
+		if (state.toasts.find(({message}) => message === toast.message)) {
+			return state
+		}
 		const newToast: Toast = ({...toast, uuid: uuid4()})
 		setTimeout(() => removeNotify(newToast), ms)
 		return {

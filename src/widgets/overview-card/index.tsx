@@ -56,7 +56,7 @@ export const Card = ({data, isLoading}: Props) => {
 	
 	return (
 		<div
-			className="flex sm:flex-row justify-between md:max-w-[800px] sm:w-full p-8 bg-base-100 shadow-xl hover:bg-base-100/75 rounded-xl flex-col gap-5">
+			className="flex sm:flex-row justify-between md:max-w-[800px] sm:w-full p-8 bg-base-100 shadow-xl hover:bg-base-100/75 rounded-xl flex-col gap-4">
 			<div className="w-64 sm:max-w-64 flex items-start flex-col gap-3">
 				<div className="flex flex-0 gap-3">
 					<div className="flex justify-center items-center w-8 h-10">
@@ -67,7 +67,8 @@ export const Card = ({data, isLoading}: Props) => {
 						<Link
 							to="/view/$uuid"
 							params={{uuid: data.uuid}}
-							className={`${isLoading ? skeleton(18) : 'card-title hover:text-white link '} text-base block max-w-56 link-hover truncate`}>
+							className={`${isLoading ? skeleton(18) : 'card-title hover:text-white link '} text-base block max-w-56 link-hover truncate`}
+						>
 							{data.name}
 						</Link>
 						<div className={`${skeleton(18)} flex-row items-start w-full text-xs stat-title`}>

@@ -11,11 +11,6 @@ type MarkerProps = {
 }
 
 const CustomMarker = ({position, icon}: MarkerProps) => {
-	// const newIcon = new Leaflet.Icon({
-	// 	iconUrl: icon,
-	// 	iconSize: [30, 30],
-	// 	iconAnchor: [15, 29]
-	// })
 	const newIcon = L.divIcon({
 		html: ReactDOMServer.renderToString(icon),
 		className: 'map-icon',
@@ -56,8 +51,10 @@ export const Map = ({points, index}: Props) => {
 	
 	if (isMountMap) return (
 		<MapContainer className="filter h-[300px]" bounds={L.latLngBounds(points)}>
-			<TileLayer attribution='<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-			           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+			<TileLayer
+				attribution='<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+				url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+			/>
 			<CustomMarker position={points[points.length - 1]} icon={<PointIcon isEnd={true}/>}/>
 			<CustomMarker position={points[i]} icon={<PointIcon/>}/>
 			<Polyline positions={points} color="black"/>

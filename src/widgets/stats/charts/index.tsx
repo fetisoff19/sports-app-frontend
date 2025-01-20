@@ -91,9 +91,15 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 	}
 	
 	const buttons = filteredButtonFields().map((item, index) => {
-		return <button className={
-			`inline-block w-full btn rounded-xl text-left hover:text-white ${param === item ? 'text-white' : 'btn-ghost'}`
-		} key={index} onClick={() => setParam(() => item as keyof ChartStats)}>{paramNames[item]}</button>
+		return (
+			<button
+				key={index}
+				onClick={() => setParam(() => item as keyof ChartStats)}
+				className={`inline-block w-full btn rounded-xl text-left hover:text-white ${param === item ? 'text-white' : 'btn-ghost'}`}
+			>
+				{paramNames[item]}
+			</button>
+		)
 	})
 	
 	const chartOptions: Highcharts.Options = {
@@ -146,8 +152,10 @@ export const StatsCharts = ({data, param, setParam, powerCurve, sport}: Props) =
 			<div className="hidden flex-col w-44 lg:w-52 md:flex">
 				{buttons}
 			</div>
-			<Dropdown valueList={filteredButtonFields()} setValue={setParam as Dispatch<SetStateAction<string>>}
-			          value={param} style={'block md:hidden'} fields={paramNames}/>
+			<Dropdown
+				valueList={filteredButtonFields()}
+				setValue={setParam as Dispatch<SetStateAction<string>>}
+				value={param} style={'block md:hidden'} fields={paramNames}/>
 			<div className="flex-1 p-4 bg-base-100 rounded-2xl h-[482px] shadow-xl">
 				<HighchartsReact highcharts={Highcharts} options={chartOptions}/>
 			</div>
