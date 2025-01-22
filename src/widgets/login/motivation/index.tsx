@@ -25,13 +25,14 @@ export const Motivation = () => {
 				<h3 className="text-lg pb-1">Core tech stack:</h3>
 				<ul className="list-disc pl-4">
 					<li className="link hover:text-white">
-						<a href="https://github.com/fetisoff19/sports-app-frontend">Client - React with DaisyUI component library,
-							TanStack's products: Query, Router and Store.
+						<a href="https://github.com/fetisoff19/sports-app-frontend">Client - React, DaisyUI,
+							TanStack's products: Query, Router and Store, maps by Leaflet, charts by Highcharts
 						</a>
 					</li>
 					<li className="link hover:text-white">
-						<a href="https://github.com/fetisoff19/sports-app-backend">Server - NestJS, PostgreSQL and parser by
-							Garmin</a>
+						<a href="https://github.com/fetisoff19/sports-app-backend">
+							Server - NestJS with Queues, Caching and Logging, db by PostgreSQL, parser by Garmin
+						</a>
 					</li>
 					<li className="link hover:text-white">
 						<a

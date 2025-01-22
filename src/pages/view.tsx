@@ -41,8 +41,7 @@ export const View = () => {
 				<div className="flex flex-col gap-2 justify-between">
 					<div className="flex gap-2 justify-between">
 						<div className="flex flex-col gap-2">
-							<div title={data.name.length > 30 ? data.name : ''}
-							     className="card-title text-white text-base block max-w-60 sm:max-w-72 truncate">
+							<div className="card-title text-white text-base block max-w-60 sm:max-w-72 truncate">
 								{data.name}
 							</div>
 							<div className="flex-row items-start w-full text-xs stat-title">
@@ -68,7 +67,7 @@ export const View = () => {
 				</div>
 			</div>
 			<div
-				className="rounded-xl  bg-base-100 flex-col gap-8 p-4 sm:p-8 h-full w-full min-w-[320px] lg:basis-3/5 shadow-xl">
+				className="rounded-xl bg-base-100 flex-col gap-8 p-4 sm:p-8 h-full w-full min-w-[320px] lg:basis-3/5 shadow-xl">
 				<div className="lg:hidden">
 					<Map points={data?.polyline?.points} index={index}/>
 				</div>

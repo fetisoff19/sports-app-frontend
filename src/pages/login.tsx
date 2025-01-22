@@ -6,20 +6,20 @@ const Login = () => {
 	
 	return (
 		<div className="bg-[url('/auth-bg-mobile.webp')] md:bg-[url('/auth-bg-desktop.webp')]
-			md:h-full w-screen mx-auto overflow-y-auto overflow-x-hidden h-[calc(100vh-4rem)]
-			bg-cover bg-center bg-fixed
-			flex flex-col items-center justify-between"
+			bg-center bg-cover bg-no-repeat h-screen w-screen fixed"
 		>
-			<div className="flex flex-col justify-between h-[calc(100vh-6rem)]">
-				<div className="flex flex-col gap-8 p-8 md:flex-row leading-6 max-w-[1200px]">
-					<div className="rounded-2xl p-8 bg-base-100/85 h-fit max-w-96 xs:max-w-80 shadow-xl">
+			<div className="absolute top-0 h-[calc(100vh-4rem)] w-screen overflow-y-auto overflow-x-hidden
+				flex flex-col items-center justify-between"
+			>
+				<div className="flex flex-col justify-between gap-8 md:flex-row leading-6 max-w-[1200px] p-8">
+					<div className="rounded-2xl p-8 bg-base-100/85 max-w-96 shadow-xl h-fit">
 						{isRegister ? <Register setRegister={setRegister}/> : <Auth setRegister={setRegister}/>}
 					</div>
-					<div className="rounded-2xl p-8 bg-base-100/85 h-fit shadow-xl max-w-96 xs:max-w-80 md:max-w-full">
+					<div className="rounded-2xl p-8 bg-base-100/85 max-w-96 shadow-xl md:max-w-full">
 						<Motivation/>
 					</div>
 				</div>
-				<div className="text-sm text-center w-full text-gray-200 pb-4 lg:text-right lg:pr-10">
+				<div className="text-sm text-center w-full text-gray-200 pb-8 lg:text-right lg:pr-10">
 					photo by{' '}
 					<a className="link hover:text-white" href="https://www.pexels.com/@pavel-danilyuk">Pavel Danilyuk</a>
 				</div>

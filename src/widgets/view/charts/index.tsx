@@ -188,8 +188,7 @@ export const Charts = ({data, setIndex}: Props) => {
 	
 	return (
 		<div className="w-full">
-			<div
-				className="flex flex-col gap-8 pb-20 sm:pb-12 xl:pb-0 sticky top-16 sm:static bg-base-100 z-10 bg-opacity-80">
+			<div className="flex flex-col gap-8 pb-20 sm:pb-12 xl:pb-0 sticky top-0 sm:static bg-base-100 z-10 bg-opacity-80">
 				<div className="flex flex-row justify-between h-12 w-full">
 					<div className="xl:flex xl:flex-row grid sm:grid-cols-4 grid-cols-3 sm:gap-2 flex-1 p-2">
 						<LiveStats
