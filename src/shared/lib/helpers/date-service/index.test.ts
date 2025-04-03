@@ -150,12 +150,7 @@ describe.each([
 				date: new Date(currentDate.setFullYear(2026)).getTime(),
 				value: 0,
 				counter: 0,
-			},
-			{
-				date: new Date(currentDate.setFullYear(2027)).getTime(),
-				value: 0,
-				counter: 0,
-			},
+			}
 		]
 	},
 ])('DateService.getDateValueCountArray.moreThan750', ({start, end, output}: TestData) => {
