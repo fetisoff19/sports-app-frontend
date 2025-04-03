@@ -1,5 +1,10 @@
 import {Store} from '@tanstack/react-store'
-import {PROVIDER_TYPE} from '@/shared/types'
+
+export enum PROVIDER_TYPE {
+	GOOGLE = 'google',
+	GITHUB = 'github',
+	EMAIL = 'email',
+}
 
 export type User = {
 	email: string | null

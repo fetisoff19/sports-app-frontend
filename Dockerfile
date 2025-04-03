@@ -1,4 +1,4 @@
-FROM node:lts-alpine as development
+FROM node:lts-alpine AS development
 
 WORKDIR /usr/src/app
 
@@ -12,7 +12,7 @@ COPY ./ ./
 
 RUN pnpm run build
 
-FROM nginx:latest as production
+FROM nginx:latest AS production
 
 COPY --from=development /usr/src/app/dist /usr/share/nginx/html
 
